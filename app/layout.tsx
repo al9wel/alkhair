@@ -4,7 +4,7 @@ import "./globals.css";
 
 const cairo = Almarai({
   subsets: ["arabic"],
-  weight: ["400"],
+  weight: ["400", "700", "800", "300"],
 });
 
 export const metadata: Metadata = {
