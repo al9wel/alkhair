@@ -1,12 +1,13 @@
 "use client";
 import { useUIStore } from "@/store/uiStore";
-import { BadgeCheck, Home, X } from "lucide-react";
+import { BadgeCheck, Home, LogOut, Settings, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import logo from "@/public/logo.png";
 const links = [
     {
-        name: "لوحه التحكم",
+        name: " الرئيسية",
         href: "/dashboard",
         active: "dashboard",
         icon: <Home />
@@ -24,63 +25,50 @@ const links = [
         icon: <Home />
     }
 ]
+
 const Sidebar = () => {
     const { isSidebarOpen, toggleSidebar } = useUIStore();
     const pathname = usePathname();
     console.log(pathname);
     return (
-        <aside className={`${isSidebarOpen ? "translate-x-80" : "translate-x-0"} fixed md:relative md:translate-x-0 flex flex-col min-h-full justify-between shadow-xl transition-all duration-300 z-40 overflow-y-auto bg-white dark:bg-bg-dark2 dark:text-white/90 w-64 md:w-80 rounded-l-2xl border border-black/10 dark:border-white/10  `}>
-            <div className="flex h-full flex-col justify-start">
-                {/* logo */}
-                <div className="z-50 min-h-[56px] w-full flex items-center justify-between  px-3 ">
-                    {/* <h1 className="text-xl font-bold bg-gradient-to-l from-blue-400 to-blue-800 px-2 py-1 rounded-md text-white">
-                        نظام الخير
-                    </h1> */}
-                    <div className="flex justify-center items-center gap-2">
-                        {/* logoo */}
-                        {/* <div className="w-8 h-8 bg-blue-500 rounded-full"></div> */}
-                        <h1 className="text-xl font-bold text-blue-500 dark:text-blue-500/90">
-                            مياه الخير الصحيه
-                        </h1>
+        <aside className={`${isSidebarOpen ? "translate-x-50" : "translate-x-0"} fixed md:relative md:translate-x-0 flex flex-col min-h-full justify-between transition-all duration-300 z-40 overflow-y-auto bg-bg-light1 dark:bg-bg-dark2 dark:text-white/90 w-50 md:w-64  border border-text-light2/50 dark:border-text-light2/25 `}>
+            <div className="w-full min-h-screen md:min-h-full flex flex-col justify-between ">
+                <div>
+                    <div className="z-50 min-h-[56px] w-full flex items-center justify-between px-3 md:py-3.5  ">
+                        <div className="flex justify-center items-center md:w-full">
+                            <Image src={logo} alt="logo" className=" w-9 md:w-9" />
+                            <h1 className="text-2xl md:text-3xl font-bold text-primary-light">
+                                الخير
+                            </h1>
+                        </div>
+                        <button
+                            className="md:hidden text-text-light3 cursor-pointer h-min w-min rounded p-1 hover:text-primary-light duration-150"
+                            onClick={toggleSidebar}>
+                            <X />
+                        </button>
                     </div>
-                    <button
-                        className="md:hidden cursor-pointer h-min w-min rounded p-1 bg-gray-100 hover:bg-gray-200 hover:text-blue-500 duration-150 dark:bg-bg-dark4 hover:dark:bg-bg-dark3"
-                        onClick={toggleSidebar}>
-                        <X />
+                    <hr className="h-[1px] w-[80%] mx-auto border-0 bg-gradient-to-r from-transparent via-text-light2 dark:via-text-light2/50 to-transparent" />
+                    <ul className="flex flex-col gap-2 mt-4">
+                        {links.map((link) => (
+                            <li key={link.name} className="px-2">
+                                <Link href={link.href} className={`flex gap-2 p-2 ${pathname === link.href ? "bg-primary-light text-white" : "text-text-light3"} transition-all    duration-200  hover:bg-primary-hover hover:text-white rounded-xl`}>
+                                    {link.icon}
+                                    <h2>{link.name}</h2>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <div className="px-2 pb-4">
+                    <Link href={"/settings"} className={`flex gap-2 p-2 ${pathname === "/settings" ? "bg-primary-light text-white" : "text-text-light3"} transition-all    duration-200  hover:bg-primary-hover hover:text-white rounded-xl`}>
+                        <Settings className="size-6 cursor-pointer " />
+                        <h2>الاعدادت</h2>
+                    </Link>
+                    <button className={`flex gap-2 w-full mt-2  p-2  transition-all cursor-pointer duration-200 text-text-light3  hover:bg-primary-hover hover:text-white rounded-lg`}>
+                        <LogOut className="size-6 cursor-pointer " />
+                        <h2>تسجيل الخروج</h2>
                     </button>
                 </div>
-                {/* user */}
-                <div className="border-y mt-2 border-gray-200 dark:border-gray-700 py-2 px-4">
-                    <div className="flex items-center gap-4">
-                        <Image
-                            src={"/al9wel.jpeg"}
-                            alt="user avatar"
-                            width={40}
-                            height={40}
-                            className="rounded-full"
-                        />
-                        <div className="flex justify-start items-start flex-col">
-                            <div className="text-[16px] font-medium">سالم احمد الصويل</div>
-                            <div className="flex items-center text-sm gap-1 text-black/50 dark:text-white/50 mt-2">
-                                {/* <BadgeCheck size={20} className="text-green-500" /> */}
-                                <div className="size-2.5 bg-green-500 rounded-full"></div>
-                                <p className="">مدخل بيانات</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                {/* links */}
-                <ul className="flex flex-col gap-4 mt-4">
-                    {links.map((link) => (
-                        <li key={link.name} className="px-2">
-                            <Link href={link.href} className={`flex gap-2 p-2 ${pathname === link.href ? "bg-blue-500 dark:bg-blue-800 text-white/90 border-r-10 border-bg-dark1 dark:border-gray-300" : "bg-gray-100 dark:bg-bg-dark4 "} transition-all    duration-200  hover:dark:bg-blue-900 hover:bg-blue-600 hover:text-white/90 rounded-lg`}>
-                                {link.icon}
-                                <h2>{link.name}</h2>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
             </div>
         </aside>
     )

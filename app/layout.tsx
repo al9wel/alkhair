@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Cairo } from "next/font/google";
+import { Almarai } from "next/font/google";
 import "./globals.css";
 
-const cairo = Cairo({
+const cairo = Almarai({
   subsets: ["arabic"],
-  weight: ["400", "700", "600"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {

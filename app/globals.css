@@ -2,10 +2,17 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --color-bg-dark1: #0a0f14;
+    --color-bg-dark1: #0f171f;
     --color-bg-dark2: #0f1822;
     --color-bg-dark3: #191b1d;
     --color-bg-dark4: #201f1e;
     --color-bg-dark5: #0f1822;
     --color-bg-dark6: #0a0f14;
+    --color-bg-light1: #f9f9f9;
+    --color-bg-light2: #ffffff;
+    --color-text-light1: #bbbcc1;
+    --color-text-light2: #aeadb6;
+    --color-text-light3: #87868e;
+    --color-primary-light: #5ca4e5;
+    --color-primary-hover: #4f8bc1;
 }
