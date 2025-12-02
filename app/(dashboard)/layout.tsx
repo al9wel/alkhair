@@ -6,7 +6,7 @@ export default function DashboardLayout({ children, }: Readonly<{ children: Reac
     const { isDarkMode } = useUIStore();
 
     return (
-        <div className={`${isDarkMode ? "dark" : ""} min-h-screen flex relative text-gray-900`}>
+        <div className={`${isDarkMode ? "dark" : ""} min-h-screen flex relative text-gray-900 dark:bg-bg-dark1`}>
             {/* <aside className="w-64 z-40 absolute inset-0 md:relative  bg-blue-50 border-l border-gray-200" /> */}
             <Sidebar />
             <main className="flex w-full flex-col bg-gray-100 dark:bg-bg-dark1">

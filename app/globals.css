@@ -2,8 +2,10 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --color-bg-dark1: #1c2428;
-    --color-bg-dark2: #202426;
+    --color-bg-dark1: #0a0f14;
+    --color-bg-dark2: #0f1822;
     --color-bg-dark3: #191b1d;
     --color-bg-dark4: #201f1e;
+    --color-bg-dark5: #0f1822;
+    --color-bg-dark6: #0a0f14;
 }
