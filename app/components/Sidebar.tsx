@@ -81,7 +81,7 @@ const Sidebar = () => {
     return (
         // <aside className={`${isSidebarOpen ? "translate-x-50" : "translate-x-0"} fixed top-0 right-0 md:relative md:translate-x-0  min-h-screen  transition-all duration-300 z-40 overflow-y-auto bg-bg-light1 dark:bg-bg-dark2 dark:text-white/90 w-50 md:w-64  border border-text-light2/50 dark:border-text-light2/25 `}>
         <aside
-            className={`${isSidebarOpen ? "translate-x-0" : "translate-x-full"} fixed top-0 right-0 h-screen w-64md:translate-x-0  transition-all duration-300 z-40 bg-bg-light1 dark:bg-bg-dark2 dark:text-white/90 border border-text-light2/50 dark:border-text-light2/25`}
+            className={`${isSidebarOpen ? "translate-x-0" : "translate-x-full"} fixed top-0 right-0 h-screen w-64 md:translate-x-0  transition-all duration-300 z-40 bg-bg-light1 dark:bg-bg-dark2 dark:text-white/90 border border-text-light2/50 dark:border-text-light2/25`}
         >
             <div className="w-full flex items-center justify-between px-3 py-3.5 ">
                 <div className="flex justify-center items-center md:w-full">
