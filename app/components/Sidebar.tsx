@@ -67,7 +67,7 @@ const links = [
         icon: <Home />
     },
     {
-        name: "المخزون",
+        name: "البضاعه",
         href: "/",
         active: "",
         icon: <Home />
@@ -79,7 +79,15 @@ const Sidebar = () => {
     const pathname = usePathname();
     console.log(pathname);
     return (
-        <aside className={`${isSidebarOpen ? "translate-x-50" : "translate-x-0"} fixed top-0 right-0 md:relative md:translate-x-0  min-h-screen  transition-all duration-300 z-40 overflow-y-auto bg-bg-light1 dark:bg-bg-dark2 dark:text-white/90 w-50 md:w-64  border border-text-light2/50 dark:border-text-light2/25 `}>
+        // <aside className={`${isSidebarOpen ? "translate-x-50" : "translate-x-0"} fixed top-0 right-0 md:relative md:translate-x-0  min-h-screen  transition-all duration-300 z-40 overflow-y-auto bg-bg-light1 dark:bg-bg-dark2 dark:text-white/90 w-50 md:w-64  border border-text-light2/50 dark:border-text-light2/25 `}>
+        <aside
+            className={`${isSidebarOpen ? "translate-x-0" : "translate-x-full"} 
+  fixed top-0 right-0 h-screen w-64
+  md:translate-x-0  
+  transition-all duration-300 z-40 
+  bg-bg-light1 dark:bg-bg-dark2 dark:text-white/90 
+  border border-text-light2/50 dark:border-text-light2/25`}
+        >
             {/* <div className="w-full h-full flex flex-col justify-between ">
                 <div>
                     <div className="w-full flex items-center justify-between px-3 py-3.5 ">
