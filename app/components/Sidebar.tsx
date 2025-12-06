@@ -1,5 +1,5 @@
 "use client";
-import { useUIStore } from "@/store/uiStore";
+import { useUIStore } from "@/app/store/uiStore";
 import { Home, LogOut, Settings, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -107,7 +107,7 @@ const Sidebar = () => {
                     </li>
                 ))}
             </ul>
-            <div className="px-2 pb-4 mt-6">
+            <div className="px-2 pb-4 mt-10 md:mt-8">
                 <hr className="h-[1px] w-[80%] mx-auto border-0 bg-gradient-to-r from-transparent via-text-light2 dark:via-text-light2/50 to-transparent" />
                 <Link href={"/settings"} className={`flex gap-2 p-2 ${pathname === "/settings" ? "bg-primary-light text-white" : "text-text-light3"} transition-all    duration-200  hover:bg-primary-hover hover:text-white rounded-xl`}>
                     <Settings className="size-6 cursor-pointer " />

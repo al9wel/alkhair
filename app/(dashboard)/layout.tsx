@@ -1,7 +1,7 @@
 "use client";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import { useUIStore } from "@/store/uiStore";
+import { useUIStore } from "@/app/store/uiStore";
 export default function DashboardLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
     const { isDarkMode } = useUIStore();
 

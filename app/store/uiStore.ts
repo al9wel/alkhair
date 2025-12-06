@@ -6,7 +6,7 @@ type UIStore = {
   toggleDarkMode: () => void;
 };
 export const useUIStore = create<UIStore>((set) => ({
-  isSidebarOpen: true,
+  isSidebarOpen: false,
   isDarkMode: false,
   toggleSidebar:() => {
     set((state) => ({ isSidebarOpen: !state.isSidebarOpen }))

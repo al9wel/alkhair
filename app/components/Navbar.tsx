@@ -1,5 +1,5 @@
 "use client";
-import { useUIStore } from "@/store/uiStore";
+import { useUIStore } from "@/app/store/uiStore";
 import { Menu, Moon, Sun } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
