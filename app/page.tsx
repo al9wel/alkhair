@@ -1,12 +1,83 @@
 import Link from "next/link";
-
+import Image from "next/image";
+import logo from "@/public/logo.png";
 export default function Home() {
   return (
-    <div className="w-full h-screen flex flex-col gap-4 justify-center items-center">
-      <h1>welcom to home page</h1>
-      <Link href={"/dashboard"} className="bg-blue-200 p-2 rounded-md">
-        Goto Dashboard
-      </Link>
+    <div className="min-h-screen bg-gradient-to-b from-sky-100 to-blue-200 dark:from-bg-dark1 dark:to-bg-dark2">
+      {/* Hero Section */}
+      <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center">
+        {/* Logo/Icon */}
+        <div className="flex justify-center items-center my-6">
+          <Image src={logo} alt="logo" className=" w-12 -ml-3 md:w-18 md:-ml-5" />
+          <h1 className="text-6xl md:text-8xl font-bold text-primary-light  drop-shadow-lg">
+            لخير
+          </h1>
+        </div>
+
+        {/* Tagline */}
+        <p className="text-2xl md:text-3xl text-gray-700 dark:text-text-light1 mb-2">
+          للماء و الثلج الصحي
+        </p>
+
+        {/* Description */}
+        <p className="text-lg md:text-xl text-gray-600 dark:text-text-light2 mb-12 max-w-2xl">
+          نوفر لكم أجود أنواع الثلج والمياه النقية بأسعار منافسة وخدمة توصيل سريعة
+        </p>
+
+        {/* Features */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl">
+          <div className="bg-white/80 dark:bg-bg-dark3/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+            <div className="text-4xl mb-3">❄️</div>
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-text-light1 mb-2">
+              ثلج نقي
+            </h3>
+            <p className="text-gray-600 dark:text-text-light3">
+              ثلج صافي ونقي بأحجام متعددة
+            </p>
+          </div>
+
+          <div className="bg-white/80 dark:bg-bg-dark3/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+            <div className="text-4xl mb-3">💧</div>
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-text-light1 mb-2">
+              مياه معبأة
+            </h3>
+            <p className="text-gray-600 dark:text-text-light3">
+              مياه نقية ومفلترة بأعلى المعايير
+            </p>
+          </div>
+
+          <div className="bg-white/80 dark:bg-bg-dark3/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+            <div className="text-4xl mb-3">🚚</div>
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-text-light1 mb-2">
+              توصيل سريع
+            </h3>
+            <p className="text-gray-600 dark:text-text-light3">
+              خدمة توصيل سريعة لجميع المناطق
+            </p>
+          </div>
+        </div>
+
+        {/* CTA Button */}
+        <Link
+          href="/dashboard"
+          className="bg-primary-light hover:bg-primary-hover text-white text-xl font-semibold px-10 py-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+        >
+          الدخول إلى لوحة التحكم
+        </Link>
+
+        {/* Contact Info */}
+        <div className="mt-16 text-gray-600 dark:text-text-light3">
+          <p className="text-lg">للتواصل والطلبات</p>
+          <p className="text-2xl font-semibold text-primary-light mt-2" dir="ltr">
+            📞 +967 736584524
+          </p>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className=" py-4 text-center text-gray-500 dark:text-text-light3">
+        <p>© 2025 الخير للماء و الثلج الصحي - جميع الحقوق محفوظة</p>
+      </footer>
     </div>
   );
 }
