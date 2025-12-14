@@ -16,3 +16,37 @@
     --color-primary-light: #5ca4e5;
     --color-primary-hover: #4f8bc1;
 }
+
+/* ===== Clerk RTL Fix ===== */
+
+/* قلب اتجاه كل واجهات Clerk */
+.cl-root,
+.cl-modal,
+.cl-userButton,
+.cl-userProfile {
+    direction: rtl;
+    text-align: right;
+}
+
+/* UserButton (الصورة يمين – الاسم شمال) */
+.cl-userButtonBox {
+    flex-direction: row-reverse !important;
+    gap: 0.5rem;
+}
+
+/* UserProfile – الهيدر */
+.cl-userProfileHeader {
+    flex-direction: row-reverse !important;
+    text-align: right;
+}
+
+/* UserProfile – القائمة الجانبية */
+.cl-userProfileNav {
+    text-align: right;
+}
+
+/* أيقونة الإغلاق */
+.cl-modalCloseButton {
+    right: auto !important;
+    left: 1rem !important;
+}
