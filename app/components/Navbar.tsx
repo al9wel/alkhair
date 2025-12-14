@@ -3,6 +3,7 @@ import { useUIStore } from "@/app/store/uiStore";
 import { Menu, Moon, Sun } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { useUser } from "@clerk/nextjs";
 const getTitle = (pathname: string) => {
     switch (pathname) {
         case "/dashboard": {
@@ -22,7 +23,7 @@ const getTitle = (pathname: string) => {
 const Navbar = () => {
     const { isDarkMode, toggleSidebar, toggleDarkMode } = useUIStore();
     const pathname = usePathname();
-
+    const { user } = useUser()
     return (
         <nav className="flex items-center h-16 justify-between fixed top-0 left-0 w-full md:w-[calc(100%-16rem)]   bg-bg-light1 dark:bg-bg-dark2 px-4 py-3 text-black/70 dark:text-text-light1 border-b border-text-light2/50 dark:border-text-light2/25">
             <div className="flex items-center justify-center gap-4">
@@ -42,13 +43,13 @@ const Navbar = () => {
                 {/* user */}
                 <div className="flex items-center gap-1">
                     <Image
-                        src={"/al9wel.jpeg"}
+                        src={user?.imageUrl || '/avatar.png'}
                         alt="user avatar"
                         width={30}
                         height={30}
                         className="rounded-full"
                     />
-                    <p className="text-[16px] font-medium hidden sm:block">سالم احمد الصويل</p>
+                    <p className="text-[16px] font-medium hidden sm:block">{user?.fullName}</p>
                 </div>
             </div>
         </nav>

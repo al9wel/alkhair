@@ -1,22 +1,42 @@
 import Link from "next/link";
 import Image from "next/image";
 import logo from "@/public/logo.png";
+import { SignedIn, SignedOut, UserAvatar, UserButton } from "@clerk/nextjs";
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-100 to-blue-200 dark:from-bg-dark1 dark:to-bg-dark2">
+    <div className="min-h-screen bg-gradient-to-b from-sky-100 to-blue-200">
+      <header className="flex justify-between py-2.5 px-6 rounded-md  w-full bg-white/70 dark:bg-bg-dark3/70 backdrop-blur-sm z-50 shadow-md">
+        <div className="flex justify-center items-center">
+          <Image src={logo} alt="logo" className=" w-7 -ml-1.5 " />
+          <h1 className="text-3xl font-bold text-primary-light  drop-shadow-lg">
+            لخير
+          </h1>
+        </div>
+        <SignedOut>
+          <div className="flex justify-center items-center gap-2">
+            <Link href="/sign-in" className="bg-primary-light hover:bg-primary-hover rounded-md px-2 py-1 text-white border border-black/10">دخول</Link>
+            <Link href="/sign-up" className="bg-primary-light hover:bg-primary-hover rounded-md px-2 py-1 text-white border border-black/10">تسجيل</Link>
+          </div>
+        </SignedOut>
+        <SignedIn>
+          <UserButton showName
+          />
+          {/* <UserAvatar /> */}
+        </SignedIn>
+      </header>
       {/* Hero Section */}
-      <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center">
+      <div className="flex flex-col mt-6 md:mt-2 lg:mt-0 items-center justify-center min-h-screen px-4 text-center">
         {/* Logo/Icon */}
-        <div className="flex justify-center items-center my-6">
+        {/* <div className="flex justify-center items-center my-6">
           <Image src={logo} alt="logo" className=" w-12 -ml-3 md:w-18 md:-ml-5" />
           <h1 className="text-6xl md:text-8xl font-bold text-primary-light  drop-shadow-lg">
             لخير
           </h1>
-        </div>
+        </div> */}
 
         {/* Tagline */}
         <p className="text-2xl md:text-3xl text-gray-700 dark:text-text-light1 mb-2">
-          للماء و الثلج الصحي
+          الخير للماء و الثلج الصحي
         </p>
 
         {/* Description */}
@@ -73,7 +93,6 @@ export default function Home() {
           </p>
         </div>
       </div>
-
       {/* Footer */}
       <footer className=" py-4 text-center text-gray-500 dark:text-text-light3">
         <p>© 2025 الخير للماء و الثلج الصحي - جميع الحقوق محفوظة</p>

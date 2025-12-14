@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Almarai } from "next/font/google";
 import "./globals.css";
-
+import { ClerkProvider, SignedOut, SignIn, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { SignedIn } from "@clerk/nextjs";
+import Image from "next/image";
+import logo from "@/public/logo.png";
 const cairo = Almarai({
   subsets: ["arabic"],
   weight: ["400", "700", "800", "300"],
@@ -18,12 +21,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl">
-      <body
-        className={`${cairo.className} antialiased `}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="ar" dir="rtl">
+        <body className={`${cairo.className} antialiased `}>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

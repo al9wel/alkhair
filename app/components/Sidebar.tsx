@@ -14,13 +14,13 @@ const links = [
     },
     {
         name: "المبيعات",
-        href: "/sales",
+        href: "/dashboard/sales",
         active: "sales",
         icon: <Home />
     },
     {
         name: "المصروفات",
-        href: "/expenses",
+        href: "/dashboard/expenses",
         active: "expenses",
         icon: <Home />
     },
@@ -77,7 +77,6 @@ const links = [
 const Sidebar = () => {
     const { isSidebarOpen, toggleSidebar } = useUIStore();
     const pathname = usePathname();
-    console.log(pathname);
     return (
         // <aside className={`${isSidebarOpen ? "translate-x-50" : "translate-x-0"} fixed top-0 right-0 md:relative md:translate-x-0  min-h-screen  transition-all duration-300 z-40 overflow-y-auto bg-bg-light1 dark:bg-bg-dark2 dark:text-white/90 w-50 md:w-64  border border-text-light2/50 dark:border-text-light2/25 `}>
         <aside
@@ -109,7 +108,7 @@ const Sidebar = () => {
             </ul>
             <div className="px-2 pb-4 mt-10 md:mt-8">
                 <hr className="h-[1px] w-[80%] mx-auto border-0 bg-gradient-to-r from-transparent via-text-light2 dark:via-text-light2/50 to-transparent" />
-                <Link href={"/settings"} className={`flex gap-2 p-2 ${pathname === "/settings" ? "bg-primary-light text-white" : "text-text-light3"} transition-all    duration-200  hover:bg-primary-hover hover:text-white rounded-xl`}>
+                <Link href={"/dashboard/settings"} className={`flex gap-2 p-2 ${pathname === "/dashboard/settings" ? "bg-primary-light text-white" : "text-text-light3"} transition-all    duration-200  hover:bg-primary-hover hover:text-white rounded-xl`}>
                     <Settings className="size-6 cursor-pointer " />
                     <h2>الاعدادت</h2>
                 </Link>
