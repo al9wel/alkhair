@@ -1,17 +1,15 @@
-import { redirect } from 'next/navigation'
-import { clerkClient } from '@clerk/nextjs/server'
+import { auth, clerkClient } from '@clerk/nextjs/server'
 import { setRole } from './_actions'
-import { checkRole } from '@/app/utils/roles'
+import { allowedRole } from '@/app/utils/roles'
 
-export default async function AdminDashboard() {
-    const role = await checkRole("admin")
-    if (!role) {
-        redirect('/dashboard')
-    }
+export default async function SettingsPage() {
+    await allowedRole("admin");
+    const { userId } = await auth()
     const client = await clerkClient()
     const { data } = await client.users.getUserList({
         orderBy: 'created_at',
     })
+    const users = data.filter((user) => user.id !== userId)
     return (
         <div className='mt-20'>
             <p>هذه الصفحه للادمن فقط</p>
@@ -26,7 +24,7 @@ export default async function AdminDashboard() {
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                        {data.map((user) => (
+                        {users.map((user) => (
                             <tr key={user.id} className="hover:bg-gray-50">
                                 <td className="px-4 py-2 text-sm text-gray-900">{user.fullName}</td>
                                 <td className="px-4 py-2 text-sm text-gray-900">{user.emailAddresses[0].emailAddress}</td>

@@ -1,123 +1,128 @@
 "use client";
 import { useUIStore } from "@/app/store/uiStore";
-import { Home, LogOut, Settings, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import logo from "@/public/logo.png";
+import { useClerk } from "@clerk/nextjs";
+import {
+    LogOut, Settings, X,
+    Home,
+    ShoppingCart,
+    Receipt,
+    ArrowDownCircle,
+    CreditCard,
+    Users,
+    UserCog,
+    BarChart3,
+    Boxes,
+    Package,
+} from "lucide-react"
+
 const links = [
     {
-        name: " الرئيسية",
+        name: "الرئيسية",
         href: "/dashboard",
-        active: "dashboard",
-        icon: <Home />
+        icon: <Home />,
     },
     {
         name: "المبيعات",
         href: "/dashboard/sales",
-        active: "sales",
-        icon: <Home />
+        icon: <ShoppingCart />,
     },
     {
         name: "المصروفات",
         href: "/dashboard/expenses",
-        active: "expenses",
-        icon: <Home />
+        icon: <Receipt />,
     },
     {
         name: "المسحوبات",
-        href: "/",
-        active: "",
-        icon: <Home />
+        href: "/dashboard/withdrawals",
+        icon: <ArrowDownCircle />,
     },
     {
         name: "الديون",
-        href: "/",
-        active: "",
-        icon: <Home />
+        href: "/dashboard/debts",
+        icon: <CreditCard />,
     },
     {
         name: "العملاء",
-        href: "/",
-        active: "",
-        icon: <Home />
+        href: "/dashboard/customers",
+        icon: <Users />,
     },
     {
         name: "الموظفين",
-        href: "/",
-        active: "",
-        icon: <Home />
+        href: "/dashboard/employees",
+        icon: <UserCog />,
     },
     {
         name: "التقارير",
-        href: "/",
-        active: "",
-        icon: <Home />
-    },
-    {
-        name: "المخزون",
-        href: "/",
-        active: "",
-        icon: <Home />
+        href: "/dashboard/reports",
+        icon: <BarChart3 />,
     },
     {
         name: "المنتجات",
-        href: "/",
-        active: "",
-        icon: <Home />
+        href: "/dashboard/products",
+        icon: <Package />,
     },
     {
-        name: "البضاعه",
-        href: "/",
-        active: "",
-        icon: <Home />
-    }
+        name: "المخزون",
+        href: "/dashboard/inventory",
+        icon: <Boxes />,
+    },
 ]
 
+
 const Sidebar = () => {
-    const { isSidebarOpen, toggleSidebar } = useUIStore();
+    const { isSidebarOpen, toggleSidebar, setPageTitle } = useUIStore();
     const pathname = usePathname();
+    const { signOut } = useClerk();
     return (
-        // <aside className={`${isSidebarOpen ? "translate-x-50" : "translate-x-0"} fixed top-0 right-0 md:relative md:translate-x-0  min-h-screen  transition-all duration-300 z-40 overflow-y-auto bg-bg-light1 dark:bg-bg-dark2 dark:text-white/90 w-50 md:w-64  border border-text-light2/50 dark:border-text-light2/25 `}>
-        <aside
-            className={`${isSidebarOpen ? "translate-x-0" : "translate-x-full"} fixed top-0 right-0 h-screen w-64 md:translate-x-0  transition-all duration-300 z-40 bg-bg-light1 dark:bg-bg-dark2 dark:text-white/90 border border-text-light2/50 dark:border-text-light2/25`}
-        >
-            <div className="w-full flex items-center justify-between px-3 py-3.5 ">
-                <div className="flex justify-center items-center md:w-full">
-                    <Image src={logo} alt="logo" className=" w-9 md:w-9" />
-                    <h1 className="text-2xl md:text-3xl font-bold text-primary-light">
-                        الخير
-                    </h1>
+        <>
+            <div onClick={toggleSidebar} className={`${isSidebarOpen ? "translate-x-0" : "translate-x-full"}  md:hidden w-full h-screen backdrop-blur-[1px] bg-black/30 dark:bg-black/50 z-30 fixed`}></div>
+            <aside
+                className={`${isSidebarOpen ? "translate-x-0" : "translate-x-full"} fixed top-0 right-0 h-screen w-64 md:translate-x-0  transition-all duration-300 z-40 bg-light dark:bg-dark text-black/50 dark:text-light-text border border-border/50 dark:border-border/25`}
+            >
+                <div className="w-full flex items-center justify-between px-3 py-3.5 ">
+                    <div className="flex justify-center items-center md:w-full">
+                        <Image src={logo} alt="logo" className=" w-9 md:w-9" />
+                        <h1 className="text-2xl md:text-3xl font-bold text-primary">
+                            الخير
+                        </h1>
+                    </div>
+                    <button
+                        className="md:hidden text-text-light3 cursor-pointer h-min w-min rounded p-1 hover:text-primary duration-150"
+                        onClick={toggleSidebar}>
+                        <X />
+                    </button>
                 </div>
-                <button
-                    className="md:hidden text-text-light3 cursor-pointer h-min w-min rounded p-1 hover:text-primary-light duration-150"
-                    onClick={toggleSidebar}>
-                    <X />
-                </button>
-            </div>
-            <hr className="h-[1px] w-[80%] mx-auto border-0 bg-gradient-to-r from-transparent via-text-light2 dark:via-text-light2/50 to-transparent" />
-            <ul className="flex flex-col gap-2 mt-4">
-                {links.map((link) => (
-                    <li key={link.name} className="px-2">
-                        <Link href={link.href} className={`flex gap-2 p-2 ${pathname === link.href ? "bg-primary-light text-white" : "text-text-light3"} transition-all    duration-200  hover:bg-primary-hover hover:text-white rounded-xl`}>
-                            {link.icon}
-                            <h2>{link.name}</h2>
-                        </Link>
-                    </li>
-                ))}
-            </ul>
-            <div className="px-2 pb-4 mt-10 md:mt-8">
-                <hr className="h-[1px] w-[80%] mx-auto border-0 bg-gradient-to-r from-transparent via-text-light2 dark:via-text-light2/50 to-transparent" />
-                <Link href={"/dashboard/settings"} className={`flex gap-2 p-2 ${pathname === "/dashboard/settings" ? "bg-primary-light text-white" : "text-text-light3"} transition-all    duration-200  hover:bg-primary-hover hover:text-white rounded-xl`}>
-                    <Settings className="size-6 cursor-pointer " />
-                    <h2>الاعدادت</h2>
-                </Link>
-                <button className={`flex gap-2 w-full mt-2  p-2  transition-all cursor-pointer duration-200 text-text-light3  hover:bg-primary-hover hover:text-white rounded-lg`}>
-                    <LogOut className="size-6 cursor-pointer " />
-                    <h2>تسجيل الخروج</h2>
-                </button>
-            </div>
-        </aside>
+                <hr className="h-[1px] w-[80%] mx-auto border-0 bg-gradient-to-r from-transparent via-light-text dark:via-light-text/50 to-transparent" />
+                <ul className="flex flex-col gap-2 mt-4">
+                    {links.map((link) => (
+                        <li key={link.name} className="px-2">
+                            <Link onClick={() => setPageTitle(link.name)} href={link.href} className={`flex gap-2 p-2 ${pathname === link.href ? "bg-primary text-white" : ""} transition-all    duration-200  hover:bg-primary-hover hover:text-white rounded-xl`}>
+                                {link.icon}
+                                <h2>{link.name}</h2>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+                <div className="px-2 pb-4 mt-2">
+                    <hr className="h-[1px] w-[80%] mx-auto border-0 bg-gradient-to-r from-transparent via-light-text dark:via-light-text/50 to-transparent" />
+                    <Link onClick={() => setPageTitle("الاعدادت")} href={"/dashboard/settings"} className={`flex gap-2 p-2 ${pathname === "/dashboard/settings" ? "bg-primary text-white" : ""} transition-all    duration-200  hover:bg-primary-hover hover:text-white rounded-xl`}>
+                        <Settings className="size-6 cursor-pointer " />
+                        <h2>الاعدادت</h2>
+                    </Link>
+                    <button
+                        onClick={() => signOut()}
+                        className={`flex gap-2 w-full mt-2  p-2  transition-all cursor-pointer duration-200   hover:bg-primary-hover hover:text-white rounded-lg`}>
+                        <LogOut className="size-6 cursor-pointer " />
+                        <h2>تسجيل الخروج</h2>
+                    </button>
+                </div>
+            </aside>
+
+        </>
     )
 }
 

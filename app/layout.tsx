@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Almarai } from "next/font/google";
 import "./globals.css";
-import { ClerkProvider, SignedOut, SignIn, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
-import { SignedIn } from "@clerk/nextjs";
-import Image from "next/image";
-import logo from "@/public/logo.png";
+import { ClerkProvider, } from "@clerk/nextjs";
 const cairo = Almarai({
   subsets: ["arabic"],
   weight: ["400", "700", "800", "300"],

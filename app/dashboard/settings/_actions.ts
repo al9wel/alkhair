@@ -1,19 +1,19 @@
 'use server'
 
-import { clerkClient } from '@clerk/nextjs/server'
+import { allowedRole } from '@/app/utils/roles'
+import {  clerkClient } from '@clerk/nextjs/server'
 import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
 
 export async function setRole(formData: FormData) {
-    const client = await clerkClient()
-  // Check that the user trying to set the Role is an admin
+    // Check that the user trying to set the Role is an admin
+    await allowedRole("admin");
     try {
-        const role = formData.get('role')
+        const client = await clerkClient()
+        const newRole = formData.get('role')
         await client.users.updateUserMetadata(formData.get('id') as string, {
-            publicMetadata: { role },
+            publicMetadata: { role: newRole },
         })
         revalidatePath('/dashboard/settings')
-        redirect('/dashboard/settings')
     } 
     catch (err) {
         console.log(err)
