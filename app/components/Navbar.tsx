@@ -21,7 +21,7 @@ const Navbar = () => {
                     className="h-min block md:hidden cursor-pointer w-min rounded p-2 hover:text-primary duration-150 ">
                     <Menu className="" />
                 </button>
-                <h1 className="text-xl md:text-2xl font-extrabold ">{pageTitle}</h1>
+                <h1 className="text-xl md:text-2xl text-black/80 dark:text-white font-extrabold ">{pageTitle}</h1>
             </div>
             <div className="flex items-center justify-center gap-4">
                 <button
