@@ -10,6 +10,7 @@ const colorMap = {
     purple: { bg: "bg-purple-100/80 dark:bg-purple-800/20", icon: "text-purple-600" },
 };
 
+
 type Props = {
     title: string;
     value: string | number;
@@ -18,7 +19,7 @@ type Props = {
 };
 
 const StatCard = ({ title, value, Icon, color = "blue" }: Props) => {
-    const classes = colorMap[color];
+    const classes = colorMap[color as keyof typeof colorMap];
 
     return (
         <div className={`p-6 rounded-2xl shadow-2xl shadow-border/40 dark:shadow-gray-800/20 border border-border/20  dark:border-border/10 ${classes.bg}`}>
