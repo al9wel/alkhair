@@ -79,9 +79,9 @@ const Sidebar = () => {
     const { signOut } = useClerk();
     return (
         <>
-            <div onClick={toggleSidebar} className={`${isSidebarOpen ? "translate-x-0" : "translate-x-full"}  md:hidden w-full h-screen backdrop-blur-[1px] bg-black/30 dark:bg-black/50 z-30 fixed`}></div>
+            <div onClick={toggleSidebar} className={`${isSidebarOpen ? "translate-x-0" : "translate-x-full"}  md:hidden w-full h-screen backdrop-blur-[1px] bg-black/30 dark:bg-black/50 z-45 fixed`}></div>
             <aside
-                className={`${isSidebarOpen ? "translate-x-0" : "translate-x-full"} fixed top-0 right-0 h-screen w-64 md:translate-x-0  transition-all duration-300 z-40 bg-light dark:bg-dark text-black/50 dark:text-light-text border border-border/50 dark:border-border/25`}
+                className={`${isSidebarOpen ? "translate-x-0" : "translate-x-full"} fixed top-0 right-0 h-screen w-64 md:translate-x-0  transition-all duration-300 z-50 bg-light dark:bg-dark text-black/50 dark:text-light-text border border-border/50 dark:border-border/25`}
             >
                 <div className="w-full flex items-center justify-between px-3 py-3.5 ">
                     <div className="flex justify-center items-center md:w-full">

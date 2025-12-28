@@ -1,33 +1,60 @@
-import { TrendingUp } from 'lucide-react'
-import Legend from './Legend'
-const COLORS = {
-    alaqy: "#60A5FA",
-    alhna: "#F87171",
-    thlj: "#FBBF24",
-};
+"use client";
+
+import {
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    ResponsiveContainer,
+} from "recharts";
+
+const data = [
+    { name: "العلاقي", value: 350, },
+    { name: "الهناء", value: 200, },
+    { name: "الثلج", value: 170, },
+    { name: "العلاقي حار", value: 390, },
+
+];
 const SellingChart = () => {
     return (
-        <div className="flex flex-col gap-4">
-            {/* title */}
-            <div className="flex justify-between items-center text-black/70 dark:text-light-text">
-                <h3 className="text-sm md:text-base font-semibold">الربح</h3>
-                <div className="p-2 rounded-full bg-green-600 text-white">
-                    <TrendingUp size={20} />
-                </div>
-            </div>
-
-            {/* chart */}
-            <div >
-            </div>
-
-            {/* legend */}
-            <div className="flex justify-center gap-4 text-sm">
-                <Legend color={COLORS.alaqy} label="المبيعات" />
-                <Legend color={COLORS.alhna} label="المسحوبات" />
-                <Legend color={COLORS.thlj} label="المصروفات" />
-            </div>
+        <div className="flex-1 w-full pr-6">
+            <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={data} barSize={10}>
+                    <CartesianGrid
+                        strokeDasharray="3 3"
+                        vertical={false}
+                        stroke="#e5e7eb"
+                    />
+                    <XAxis
+                        dataKey="name"
+                        axisLine={false}
+                        tickLine={false}
+                        tick={{ fill: "#9ca3af", fontSize: 12 }}
+                    />
+                    <YAxis
+                        axisLine={false}
+                        tickLine={false}
+                        tick={{ fill: "#9ca3af", fontSize: 12 }}
+                    />
+                    <Tooltip
+                        cursor={{ fill: "rgba(0,0,0,0.05)" }}
+                        contentStyle={{
+                            borderRadius: "8px",
+                            borderColor: "#e5e7eb",
+                        }}
+                    />
+                    <Bar
+                        dataKey="value"
+                        fill="#60A5FA"
+                        legendType="circle"
+                        radius={[10, 10, 0, 0]}
+                    />
+                </BarChart>
+            </ResponsiveContainer>
         </div>
-    )
-}
+    );
+};
 
-export default SellingChart
+export default SellingChart;
