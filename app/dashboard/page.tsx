@@ -1,36 +1,40 @@
-"use client";
-import { DollarSign, TrendingDown, CreditCard, Package, BarChart3 } from "lucide-react";
+
+import { HandCoins, Receipt, ArrowDownCircle, DollarSign, TrendingDown, CreditCard, Package, BarChart3, TrendingUp, BarChart2 } from "lucide-react";
 import StatCard from "../components/StatCard";
 import ProfitChart from "../components/ProfitChart";
 import SellingChart from "../components/SellingChart";
-// import CustomActiveShapePieChart from "./CustomActiveShapePieChart";
+import Legend from "../components/Legend";
+import RecentsCard from "../components/RecentsCard";
+import type { Color } from "@/types/globals";
+
 
 const DashboardPage = () => {
-    // Placeholder data - replace with actual data later
+    const chartColors = [
+        "#60A5FA7d",
+        "#24fba57d",
+        "#F871717d",
+    ];
+    const colors: Color[] = ["blue", "green", "red", "yellow", "purple"];
     const stats = [
         {
             title: "المبيعات",
             value: "0",
             icon: BarChart3,
-            color: "blue"
         },
         {
             title: "المسحوبات",
             value: "0",
             icon: DollarSign,
-            color: "green"
         },
         {
             title: "المصروفات",
             value: "0",
             icon: TrendingDown,
-            color: "red"
         },
         {
             title: "الديون",
             value: "0",
             icon: CreditCard,
-            color: "yellow"
         },
         {
             title: "المخزون",
@@ -39,9 +43,70 @@ const DashboardPage = () => {
             color: "purple"
         }
     ];
+    const recentWithdrawals = [
+        {
+            id: 1,
+            name: "سالم احمد الصويل",
+            date: "2024/12/26",
+            amount: "2,100 ",
+        },
+        {
+            id: 2,
+            name: "محمد عبدالله بكير ",
+            date: "2024/12/24",
+            amount: "1,500 ",
+        },
+        {
+            id: 3,
+            name: "محمد فائز بكوره ",
+            date: "2024/12/22",
+            amount: "800 ",
+        },
+    ];
+    const recentExpenses = [
+        {
+            id: 1,
+            name: "فاتورة كهرباء",
+            date: "2024/12/25",
+            amount: "450 ",
+        },
+        {
+            id: 2,
+            name: "صيانة محل",
+            date: "2024/12/23",
+            amount: "1,200 ",
+        },
+        {
+            id: 3,
+            name: "مصاريف نقل",
+            date: "2024/12/21",
+            amount: "300 ",
+        },
+    ];
+    const recentDebts = [
+        {
+            id: 1,
+            name: "بقالة المدينه",
+            date: "2024/12/24",
+            amount: "650",
+        },
+        {
+            id: 2,
+            name: "بقالة الحمراء",
+            date: "2024/12/22",
+            amount: "1,000",
+        },
+        {
+            id: 3,
+            name: "كشك حمودي",
+            date: "2024/12/20",
+            amount: "400",
+        },
+    ];
+
     const date = new Date();
     return (
-        <div className="mt-16 p-6 bg-light dark:bg-dark min-h-screen">
+        <div className="mt-16 p-6">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="mb-8 flex justify-between items-center">
@@ -54,26 +119,77 @@ const DashboardPage = () => {
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-8">
                     {stats.map((stat, index) => (
-                        <StatCard key={index} title={stat.title} value={stat.value} Icon={stat.icon} color={stat.color} />
+                        <StatCard key={index} title={stat.title} value={stat.value} Icon={stat.icon} color={colors[index]} />
                     ))}
                 </div>
                 {/* Charts Section */}
-                {/* <div className="bg-light-content dark:bg-dark-content p-6 rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
-                    <h2 className="text-xl font-semibold text-black dark:text-white mb-4">الرسوم البيانية</h2>
-                    <div className="h-96 flex items-center justify-center border-2 border-dashed border-border/50 dark:border-border/25 rounded-lg">
-                        <div className="text-center text-black/50 dark:text-light-text/50">
-                            <BarChart3 size={48} className="mx-auto mb-4" />
-                            <p className="text-lg">مساحة الرسوم البيانية</p>
-                            <p className="text-sm">أضف الرسوم البيانية هنا لاحقاً</p>
+                <div className="grid grid-cols-5 gap-2">
+                    <div className="flex flex-col gap-4 col-span-5 lg:col-span-2 bg-light-content dark:bg-dark-content p-4 rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
+                        {/* title */}
+                        <div className="flex justify-between items-center text-black/70 dark:text-light-text">
+                            <h3 className="text-sm md:text-base font-semibold">الربح</h3>
+                            <div className="p-2 rounded-full bg-green-400/70 text-white">
+                                <TrendingUp size={20} />
+                            </div>
+                        </div>
+                        {/* chart */}
+                        <ProfitChart colors={chartColors} />
+                        {/* legend */}
+                        <div className="flex justify-center gap-4 text-sm">
+                            <Legend color={chartColors[0]} label="المبيعات" />
+                            <Legend color={chartColors[1]} label="المسحوبات" />
+                            <Legend color={chartColors[2]} label="المصروفات" />
                         </div>
                     </div>
-                </div> */}
-                <div className="grid grid-cols-5 gap-2">
-                    <div className="col-span-5 lg:col-span-2 bg-light-content dark:bg-dark-content p-6 rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
-                        <ProfitChart />
-                    </div>
-                    <div className="col-span-5 lg:col-span-3 bg-light-content dark:bg-dark-content p-6 rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
+                    <div className="flex flex-col gap-4 col-span-5 lg:col-span-3 min-h-[300px] bg-light-content dark:bg-dark-content rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
+                        {/* title */}
+                        <div className="flex justify-between p-4 pb-2 items-center text-black/70 dark:text-light-text">
+                            <h3 className="text-sm md:text-base font-semibold">الأكثر مبيعاً</h3>
+                            <div className="p-2 rounded-full bg-blue-400/90 text-white">
+                                <BarChart2 size={20} />
+                            </div>
+                        </div>
+                        {/* chart */}
                         <SellingChart />
+                    </div>
+                </div>
+                {/* recent transaction */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-6">
+                    <div className="flex flex-col gap-4 p-2 bg-light-content dark:bg-dark-content rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
+                        <div className="flex justify-between p-2 pb-0 items-center text-black/70 dark:text-light-text">
+                            <h3 className="text-sm md:text-base font-semibold">احدث المسحوبات</h3>
+                            <div className="p-2 rounded-full bg-green-400/90 text-white">
+                                <Receipt size={20} />
+                            </div>
+                        </div>
+                        <RecentsCard
+                            recenetTransaction={recentWithdrawals}
+                            color="green"
+                        />
+                    </div>
+                    <div className="flex flex-col gap-4 bg-light-content dark:bg-dark-content rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
+                        <div className="flex justify-between p-4 pb-0 items-center text-black/70 dark:text-light-text">
+                            <h3 className="text-sm md:text-base font-semibold">احدث المصروفات</h3>
+                            <div className="p-2 rounded-full bg-red-400/90 text-white">
+                                <ArrowDownCircle size={20} />
+                            </div>
+                        </div>
+                        <RecentsCard
+                            recenetTransaction={recentExpenses}
+                            color="red"
+                        />
+                    </div>
+                    <div className="flex flex-col gap-4 bg-light-content dark:bg-dark-content rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
+                        <div className="flex justify-between p-4 pb-0 items-center text-black/70 dark:text-light-text">
+                            <h3 className="text-sm md:text-base font-semibold">احدث الديون</h3>
+                            <div className="p-2 rounded-full bg-yellow-400/90 text-white">
+                                <HandCoins size={20} />
+                            </div>
+                        </div>
+                        <RecentsCard
+                            recenetTransaction={recentDebts}
+                            color="yellow"
+                        />
                     </div>
                 </div>
             </div>
