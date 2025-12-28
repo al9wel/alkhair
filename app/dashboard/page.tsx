@@ -167,8 +167,8 @@ const DashboardPage = () => {
                             color="green"
                         />
                     </div>
-                    <div className="flex flex-col gap-4 bg-light-content dark:bg-dark-content rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
-                        <div className="flex justify-between p-4 pb-0 items-center text-black/70 dark:text-light-text">
+                    <div className="flex flex-col gap-4 p-2 bg-light-content dark:bg-dark-content rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
+                        <div className="flex justify-between p-2 pb-0 items-center text-black/70 dark:text-light-text">
                             <h3 className="text-sm md:text-base font-semibold">احدث المصروفات</h3>
                             <div className="p-2 rounded-full bg-red-400/90 text-white">
                                 <ArrowDownCircle size={20} />
@@ -179,8 +179,8 @@ const DashboardPage = () => {
                             color="red"
                         />
                     </div>
-                    <div className="flex flex-col gap-4 bg-light-content dark:bg-dark-content rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
-                        <div className="flex justify-between p-4 pb-0 items-center text-black/70 dark:text-light-text">
+                    <div className="flex flex-col gap-4 p-2 bg-light-content dark:bg-dark-content rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
+                        <div className="flex justify-between p-2 pb-0 items-center text-black/70 dark:text-light-text">
                             <h3 className="text-sm md:text-base font-semibold">احدث الديون</h3>
                             <div className="p-2 rounded-full bg-yellow-400/90 text-white">
                                 <HandCoins size={20} />
