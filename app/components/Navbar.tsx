@@ -14,14 +14,14 @@ const Navbar = () => {
         toggleDarkMode();
     }
     return (
-        <nav className="flex items-center h-16 justify-between z-40 fixed top-0 left-0 w-full md:w-[calc(100%-16rem)]   bg-light dark:bg-dark px-4 py-3 text-black/70 dark:text-light-text border-b border-border/50 dark:border-border/25">
+        <nav className="flex items-center h-16 justify-between z-40 fixed top-0 left-0 w-full md:w-[calc(100%-16rem)]   bg-light dark:bg-dark px-5  text-black/70 dark:text-light-text border-b border-border/30 dark:border-border/15">
             <div className="flex items-center justify-center gap-4">
                 <button
                     onClick={toggleSidebar}
                     className="h-min block md:hidden cursor-pointer w-min rounded p-2 hover:text-primary duration-150 ">
                     <Menu className="" />
                 </button>
-                <h1 className="text-xl md:text-2xl text-black/80 dark:text-white font-extrabold ">{pageTitle}</h1>
+                <h1 className="text-xl md:text-2xl text-black/70 dark:text-white/80 font-extrabold ">{pageTitle}</h1>
             </div>
             <div className="flex items-center justify-center gap-4">
                 <button

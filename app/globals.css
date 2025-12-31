@@ -4,13 +4,13 @@
 @theme {
     /* layout colors  */
     --color-light: #ffffff;
-    --color-dark: #0f171f;
+    --color-dark: #101828;
+    --color-light-content: #f9fafb;
+    --color-dark-content: #171f2f;
     --color-light-text: #bbbcc1;
     --color-primary: #5ca4e5;
     --color-primary-hover: #4f8bc1;
     --color-border: #aeadb6;
-    --color-light-content: #f9f9f9;
-    --color-dark-content: #0f1822;
     /* layout colors  */
 }
 

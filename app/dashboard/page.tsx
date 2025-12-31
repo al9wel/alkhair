@@ -18,29 +18,38 @@ const DashboardPage = () => {
     const stats = [
         {
             title: "المبيعات",
-            value: "0",
+            value: "785,000",
             icon: BarChart3,
+            status: true,
+            statusValue: 22,
         },
         {
             title: "المسحوبات",
-            value: "0",
+            value: "104,000",
             icon: DollarSign,
+            status: false,
+            statusValue: 15,
         },
         {
             title: "المصروفات",
-            value: "0",
+            value: "2,351,000",
             icon: TrendingDown,
+            status: true,
+            statusValue: 34,
         },
         {
             title: "الديون",
-            value: "0",
+            value: "210,500",
             icon: CreditCard,
+            status: true,
+            statusValue: 9.05,
         },
         {
             title: "المخزون",
-            value: "0",
+            value: "40",
             icon: Package,
-            color: "purple"
+            status: false,
+            statusValue: 17,
         }
     ];
     const recentWithdrawals = [
@@ -119,12 +128,12 @@ const DashboardPage = () => {
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-8">
                     {stats.map((stat, index) => (
-                        <StatCard key={index} title={stat.title} value={stat.value} Icon={stat.icon} color={colors[index]} />
+                        <StatCard key={index} title={stat.title} value={stat.value} Icon={stat.icon} color={colors[index]} status={stat.status} statusValue={stat.statusValue} />
                     ))}
                 </div>
                 {/* Charts Section */}
                 <div className="grid grid-cols-5 gap-2">
-                    <div className="flex flex-col gap-4 col-span-5 lg:col-span-2 bg-light-content dark:bg-dark-content p-4 rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
+                    <div className="flex flex-col gap-4 col-span-5 lg:col-span-2 bg-light dark:bg-dark-content p-4 rounded-lg border border-border/30 dark:border-border/7 ">
                         {/* title */}
                         <div className="flex justify-between items-center text-black/70 dark:text-light-text">
                             <h3 className="text-sm md:text-base font-semibold">الربح</h3>
@@ -141,7 +150,7 @@ const DashboardPage = () => {
                             <Legend color={chartColors[2]} label="المصروفات" />
                         </div>
                     </div>
-                    <div className="flex flex-col gap-4 col-span-5 lg:col-span-3 min-h-[300px] bg-light-content dark:bg-dark-content rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
+                    <div className="flex flex-col gap-4 col-span-5 lg:col-span-3 min-h-[300px] bg-light dark:bg-dark-content rounded-lg border border-border/30 dark:border-border/7 ">
                         {/* title */}
                         <div className="flex justify-between p-4 pb-2 items-center text-black/70 dark:text-light-text">
                             <h3 className="text-sm md:text-base font-semibold">الأكثر مبيعاً</h3>
@@ -155,7 +164,7 @@ const DashboardPage = () => {
                 </div>
                 {/* recent transaction */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-6">
-                    <div className="flex flex-col gap-4 p-2 bg-light-content dark:bg-dark-content rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
+                    <div className="flex flex-col gap-4 p-2 bg-light dark:bg-dark-content rounded-lg border border-border/30 dark:border-border/7">
                         <div className="flex justify-between p-2 pb-0 items-center text-black/70 dark:text-light-text">
                             <h3 className="text-sm md:text-base font-semibold">احدث المسحوبات</h3>
                             <div className="p-2 rounded-full bg-green-400/90 text-white">
@@ -167,7 +176,7 @@ const DashboardPage = () => {
                             color="green"
                         />
                     </div>
-                    <div className="flex flex-col gap-4 p-2 bg-light-content dark:bg-dark-content rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
+                    <div className="flex flex-col gap-4 p-2 bg-light dark:bg-dark-content rounded-lg border border-border/30 dark:border-border/7">
                         <div className="flex justify-between p-2 pb-0 items-center text-black/70 dark:text-light-text">
                             <h3 className="text-sm md:text-base font-semibold">احدث المصروفات</h3>
                             <div className="p-2 rounded-full bg-red-400/90 text-white">
@@ -179,7 +188,7 @@ const DashboardPage = () => {
                             color="red"
                         />
                     </div>
-                    <div className="flex flex-col gap-4 p-2 bg-light-content dark:bg-dark-content rounded-lg border border-border/50 dark:border-border/25 shadow-sm">
+                    <div className="flex flex-col gap-4 p-2 bg-light dark:bg-dark-content rounded-lg border border-border/30 dark:border-border/7">
                         <div className="flex justify-between p-2 pb-0 items-center text-black/70 dark:text-light-text">
                             <h3 className="text-sm md:text-base font-semibold">احدث الديون</h3>
                             <div className="p-2 rounded-full bg-yellow-400/90 text-white">
