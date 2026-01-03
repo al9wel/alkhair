@@ -1,6 +1,6 @@
 "use client";
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
+import Sidebar from "@/app/components/layout/Sidebar";
+import Navbar from "@/app/components/layout/Navbar";
 import { useUIStore } from "@/app/store/uiStore";
 import { useEffect } from "react";
 export default function DashboardLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {

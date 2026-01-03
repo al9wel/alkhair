@@ -1,6 +1,6 @@
 import { auth, clerkClient } from '@clerk/nextjs/server'
 import { setRole } from './_actions'
-import { allowedRole } from '@/app/utils/roles'
+import { allowedRole } from '@/app/lib/roles'
 
 export default async function SettingsPage() {
     await allowedRole("admin");

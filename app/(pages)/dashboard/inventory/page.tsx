@@ -1,15 +1,15 @@
-import { allowedRole } from "@/app/utils/roles";
+import { allowedRole } from "@/app/lib/roles";
 
 
-const ReportsPage = async () => {
+const InventoryPage = async () => {
     await allowedRole("admin");
 
     return (
         <div className="mt-16">
             <div className="flex justify-center items-center text-7xl text-black dark:text-white">
-                التقارير
+                المخزون
             </div>
         </div>
     )
 }
-export default ReportsPage;
+export default InventoryPage;

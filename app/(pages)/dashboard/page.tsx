@@ -1,10 +1,10 @@
 
 import { HandCoins, Receipt, ArrowDownCircle, DollarSign, TrendingDown, CreditCard, Package, BarChart3, TrendingUp, BarChart2 } from "lucide-react";
-import StatCard from "../components/StatCard";
-import ProfitChart from "../components/ProfitChart";
-import SellingChart from "../components/SellingChart";
-import Legend from "../components/Legend";
-import RecentsCard from "../components/RecentsCard";
+import StatCard from "@/app/components/ui/StatCard";
+import ProfitChart from "@/app/components/ui/ProfitChart";
+import SellingChart from "@/app/components/ui/SellingChart";
+import Legend from "@/app/components/ui/Legend";
+import RecentsCard from "@/app/components/ui/RecentsCard";
 import type { Color } from "@/types/globals";
 
 

@@ -1,5 +1,5 @@
 
-import { ArrowBigDown, ArrowDown, ArrowDown01, ArrowDownFromLine, ArrowUp, Percent, type LucideIcon } from "lucide-react";
+import { ArrowDown, ArrowUp, Percent, type LucideIcon } from "lucide-react";
 import type { Color } from "@/types/globals";
 
 
