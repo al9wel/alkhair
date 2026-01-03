@@ -26,7 +26,7 @@ const StatCard = ({ title, value, Icon, color, status, statusValue }: StatCardPr
 
 
     return (
-        <div className={`p-4.5  bg-light dark:bg-dark-content rounded-2xl overflow-hidden border border-border/30 dark:border-border/7`}>
+        <div className={`p-4.5  bg-light dark:bg-dark-content rounded-2xl overflow-hidden border border-border1/30 dark:border-border1/7`}>
             <div className="flex items-center justify-between">
                 <p className="text-sm font-medium text-black/80 dark:text-white/90">{title}</p>
                 <div className={`p-2.5 rounded-full ${style.bg}  ${style.icon}`}>
