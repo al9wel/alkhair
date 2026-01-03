@@ -14,7 +14,7 @@ const Navbar = () => {
         toggleDarkMode();
     }
     return (
-        <nav className="flex items-center h-16 justify-between z-40 fixed top-0 left-0 w-full md:w-[calc(100%-16rem)]   bg-light dark:bg-dark px-5  text-black/70 dark:text-light-text border-b border-border/30 dark:border-border/15">
+        <nav className="flex items-center h-16 justify-between z-40 fixed top-0 left-0 w-full md:w-[calc(100%-16rem)]   bg-light dark:bg-dark px-5  text-black/70 dark:text-light-text border-b border-border1/30 dark:border-border1/15">
             <div className="flex items-center justify-center gap-4">
                 <button
                     onClick={toggleSidebar}

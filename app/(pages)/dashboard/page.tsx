@@ -6,6 +6,7 @@ import SellingChart from "@/app/components/ui/SellingChart";
 import Legend from "@/app/components/ui/Legend";
 import RecentsCard from "@/app/components/ui/RecentsCard";
 import type { Color } from "@/types/globals";
+import Header from "@/app/components/layout/Header";
 
 
 const DashboardPage = () => {
@@ -113,18 +114,12 @@ const DashboardPage = () => {
         },
     ];
 
-    const date = new Date();
+
     return (
         <div className="mt-16 p-6">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
-                <div className="mb-8 flex justify-between items-center">
-                    <div>
-                        <h1 className="text-2xl md:text-3xl font-bold text-black/70 dark:text-light-text">لوحة التحكم</h1>
-                        <p className="text-black/70 text-sm md:text-[16px] dark:text-light-text mt-2">نظرة عامة على الإحصائيات والأداء</p>
-                    </div>
-                    <p className="text-[16px] md:text-xl lg:text-2xl p-2  text-dark dark:text-light-text">{date.toLocaleDateString('ar-SA')}</p>
-                </div>
+                <Header title="لوحة التحكم" desc="نظرة عامة على الإحصائيات والأداء" />
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-8">
                     {stats.map((stat, index) => (
@@ -133,7 +128,7 @@ const DashboardPage = () => {
                 </div>
                 {/* Charts Section */}
                 <div className="grid grid-cols-5 gap-2">
-                    <div className="flex flex-col gap-4 col-span-5 lg:col-span-2 bg-light dark:bg-dark-content p-4 rounded-lg border border-border/30 dark:border-border/7 ">
+                    <div className="flex flex-col gap-4 col-span-5 lg:col-span-2 bg-light dark:bg-dark-content p-4 rounded-lg border border-border1/30 dark:border-border1/7 ">
                         {/* title */}
                         <div className="flex justify-between items-center text-black/70 dark:text-light-text">
                             <h3 className="text-sm md:text-base font-semibold">الربح</h3>
@@ -150,7 +145,7 @@ const DashboardPage = () => {
                             <Legend color={chartColors[2]} label="المصروفات" />
                         </div>
                     </div>
-                    <div className="flex flex-col gap-4 col-span-5 lg:col-span-3 min-h-[300px] bg-light dark:bg-dark-content rounded-lg border border-border/30 dark:border-border/7 ">
+                    <div className="flex flex-col gap-4 col-span-5 lg:col-span-3 min-h-[300px] bg-light dark:bg-dark-content rounded-lg border border-border1/30 dark:border-border1/7 ">
                         {/* title */}
                         <div className="flex justify-between p-4 pb-2 items-center text-black/70 dark:text-light-text">
                             <h3 className="text-sm md:text-base font-semibold">الأكثر مبيعاً</h3>
@@ -164,7 +159,7 @@ const DashboardPage = () => {
                 </div>
                 {/* recent transaction */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-6">
-                    <div className="flex flex-col gap-4 p-2 bg-light dark:bg-dark-content rounded-lg border border-border/30 dark:border-border/7">
+                    <div className="flex flex-col gap-4 p-2 bg-light dark:bg-dark-content rounded-lg border border-border1/30 dark:border-border1/7">
                         <div className="flex justify-between p-2 pb-0 items-center text-black/70 dark:text-light-text">
                             <h3 className="text-sm md:text-base font-semibold">احدث المسحوبات</h3>
                             <div className="p-2 rounded-full bg-green-400/90 text-white">
@@ -176,7 +171,7 @@ const DashboardPage = () => {
                             color="green"
                         />
                     </div>
-                    <div className="flex flex-col gap-4 p-2 bg-light dark:bg-dark-content rounded-lg border border-border/30 dark:border-border/7">
+                    <div className="flex flex-col gap-4 p-2 bg-light dark:bg-dark-content rounded-lg border border-border1/30 dark:border-border1/7">
                         <div className="flex justify-between p-2 pb-0 items-center text-black/70 dark:text-light-text">
                             <h3 className="text-sm md:text-base font-semibold">احدث المصروفات</h3>
                             <div className="p-2 rounded-full bg-red-400/90 text-white">
@@ -188,7 +183,7 @@ const DashboardPage = () => {
                             color="red"
                         />
                     </div>
-                    <div className="flex flex-col gap-4 p-2 bg-light dark:bg-dark-content rounded-lg border border-border/30 dark:border-border/7">
+                    <div className="flex flex-col gap-4 p-2 bg-light dark:bg-dark-content rounded-lg border border-border1/30 dark:border-border1/7">
                         <div className="flex justify-between p-2 pb-0 items-center text-black/70 dark:text-light-text">
                             <h3 className="text-sm md:text-base font-semibold">احدث الديون</h3>
                             <div className="p-2 rounded-full bg-yellow-400/90 text-white">

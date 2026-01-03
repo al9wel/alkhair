@@ -29,7 +29,7 @@ export default function Home() {
         <SignedIn>
           <Link
             href="/dashboard"
-            className="bg-primary mb-6 hover:bg-primary-hover text-white text-xl font-semibold px-10 py-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+            className="bg-primary1 mb-6 hover:bg-primary-hover text-white text-xl font-semibold px-10 py-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
           >
             الدخول إلى لوحة التحكم
           </Link>

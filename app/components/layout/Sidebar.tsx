@@ -81,17 +81,17 @@ const Sidebar = () => {
         <>
             <div onClick={toggleSidebar} className={`${isSidebarOpen ? "translate-x-0" : "translate-x-full"}  md:hidden w-full h-screen backdrop-blur-[1px] bg-black/30 dark:bg-black/50 z-45 fixed`}></div>
             <aside
-                className={`${isSidebarOpen ? "translate-x-0" : "translate-x-full"} fixed top-0 right-0 h-screen w-64 md:translate-x-0  transition-all duration-300 z-50 bg-light dark:bg-dark text-black/50 dark:text-light-text border border-border/30 dark:border-border/15`}
+                className={`${isSidebarOpen ? "translate-x-0" : "translate-x-full"} fixed top-0 right-0 h-screen w-64 md:translate-x-0  transition-all duration-300 z-50 bg-light dark:bg-dark text-black/50 dark:text-light-text border border-border1/30 dark:border-border1/15`}
             >
-                <div className="w-full flex items-center justify-between px-3 py-[13px] border-b border-border/30 dark:border-border/15 ">
+                <div className="w-full flex items-center justify-between px-3 py-[13px] border-b border-border1/30 dark:border-border1/15 ">
                     <div className="flex justify-center items-center md:w-full">
                         <Image src={logo} alt="logo" className=" w-9 md:w-9" />
-                        <h1 className="text-2xl md:text-3xl font-bold text-primary">
+                        <h1 className="text-2xl md:text-3xl font-bold text-primary1">
                             الخير
                         </h1>
                     </div>
                     <button
-                        className="md:hidden text-text-light3 cursor-pointer h-min w-min rounded p-1 hover:text-primary duration-150"
+                        className="md:hidden text-black/50 dark:text-light-text cursor-pointer h-min w-min rounded p-1 hover:text-primary1 duration-150"
                         onClick={toggleSidebar}>
                         <X />
                     </button>
@@ -100,16 +100,16 @@ const Sidebar = () => {
                 <ul className="flex flex-col gap-2 mt-4">
                     {links.map((link) => (
                         <li key={link.name} className="px-2">
-                            <Link onClick={() => setPageTitle(link.name)} href={link.href} className={`flex gap-2 p-2 ${pathname === link.href ? "bg-primary text-white" : ""} transition-all    duration-200  hover:bg-primary-hover hover:text-white rounded-xl`}>
+                            <Link onClick={() => setPageTitle(link.name)} href={link.href} className={`flex gap-2 p-2 ${pathname === link.href ? "bg-primary1 text-white" : ""} transition-all    duration-200  hover:bg-primary-hover hover:text-white rounded-xl`}>
                                 {link.icon}
                                 <h2>{link.name}</h2>
                             </Link>
                         </li>
                     ))}
                 </ul>
-                <div className="px-2 pb-4 mt-2 border-t border-border/30 dark:border-border/15">
+                <div className="px-2 pb-4 mt-2 border-t border-border1/30 dark:border-border1/15">
                     {/* <hr className="h-[1px] w-[80%] mx-auto border-0 bg-gradient-to-r from-transparent via-light-text dark:via-light-text/30 to-transparent" /> */}
-                    <Link onClick={() => setPageTitle("الاعدادت")} href={"/dashboard/settings"} className={`flex gap-2 p-2 ${pathname === "/dashboard/settings" ? "bg-primary text-white" : ""} transition-all    duration-200  hover:bg-primary-hover hover:text-white rounded-xl`}>
+                    <Link onClick={() => setPageTitle("الاعدادت")} href={"/dashboard/settings"} className={`flex gap-2 p-2 mt-2 ${pathname === "/dashboard/settings" ? "bg-primary1 text-white" : ""} transition-all    duration-200  hover:bg-primary-hover hover:text-white rounded-xl`}>
                         <Settings className="size-6 cursor-pointer " />
                         <h2>الاعدادت</h2>
                     </Link>
