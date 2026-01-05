@@ -3,6 +3,7 @@ import Sidebar from "@/app/components/layout/Sidebar";
 import Navbar from "@/app/components/layout/Navbar";
 import { useUIStore } from "@/app/store/uiStore";
 import { useEffect } from "react";
+import ToastProvider from "@/app/providers/ToastProvider";
 export default function DashboardLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
     const { isDarkMode, toggleDarkMode } = useUIStore();
     useEffect(() => {
@@ -17,7 +18,7 @@ export default function DashboardLayout({ children, }: Readonly<{ children: Reac
             <Sidebar />
             <main className="flex  w-full flex-col bg-light-content dark:bg-dark md:pr-64 min-h-screen">
                 <Navbar />
-                {children}
+                <ToastProvider>{children}</ToastProvider>
             </main>
         </section>
     );
