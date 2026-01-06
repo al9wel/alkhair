@@ -41,7 +41,7 @@ const SalesDialog = ({ id = "", name = "", amount = 0, edit = false, del = false
         return (
             <Dialog>
                 <DialogTrigger asChild>
-                    <Button size="sm" className="bg-red-400 hover:bg-red-500 text-white  p-2">
+                    <Button size="sm" className="bg-red-400 hover:bg-red-500 text-white cursor-pointer">
                         <Trash className="h-4 w-4" />
                     </Button>
                 </DialogTrigger>
@@ -86,10 +86,10 @@ const SalesDialog = ({ id = "", name = "", amount = 0, edit = false, del = false
         return (
             <Dialog>
                 <DialogTrigger asChild>
-                    <Button size="sm" className={`${edit ? "bg-yellow-600 hover:bg-yellow-700  p-2" : "bg-primary1 hover:bg-primary-hover"}  text-white`}>
-                        {/* {edit ? "تعديل" : "اضافة"} */}
+                    <Button size="sm" className={`${edit ? "bg-yellow-600 hover:bg-yellow-700 " : "bg-primary1 hover:bg-primary-hover"}  text-white cursor-pointer`}>
                         {edit && <Pen className="h-4 w-4" />}
-                        {!edit && <Plus className=" h-4 w-4" />}
+                        {!edit && "اضافة"}
+                        {!edit && <Plus className="h-4 w-4" />}
                     </Button>
                 </DialogTrigger>
                 <DialogContent

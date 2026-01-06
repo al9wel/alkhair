@@ -3,9 +3,9 @@
 import { ColumnDef } from "@tanstack/react-table"
 import SalesDialog from "./SalesDialog"
 import { deleteSale, updateSale } from "./actions"
+import { Button } from "@/app/components/ui/button"
+import { ArrowUpDown } from "lucide-react"
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
 export type Sales = {
     id: string
     name: string
@@ -23,14 +23,34 @@ export const columns: ColumnDef<Sales>[] = [
     },
     {
         accessorKey: "amount",
-        header: "الكميه",
+        header: ({ column }) => {
+            return (
+                <div className="flex items-center justify-center">
+                    <Button
+                        // variant="ghost"
+                        className=" bg-primary1 text-white hover:bg-primary-hover/30 cursor-pointer"
+                        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    >
+                        الكميه
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                    </Button>
+                </div>
+            )
+        },
+        cell: ({ row }) => {
+            return (
+                <div className="flex items-center justify-center">
+                    {row.original.amount}
+                </div>
+            );
+        },
     },
     {
         header: () => <div className="text-center">العمليات</div>,
         id: "actions",
         cell: ({ row }) => {
             return (
-                <div className="flex items-center gap-2 justify-center w-max">
+                <div className="flex items-center gap-2 justify-center">
                     <SalesDialog id={row.original.id} name={row.original.name} amount={row.original.amount} edit={true} saleAction={updateSale} />
                     <SalesDialog id={row.original.id} del={true} saleAction={deleteSale} />
                 </div>

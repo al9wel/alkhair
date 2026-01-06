@@ -1,5 +1,4 @@
 "use server";
-
 export async function createSale(state:{message: string, status: number},formData: FormData) {
   const id = formData.get("id");
   const name = formData.get("name");
@@ -34,3 +33,4 @@ export async function deleteSale(state:{message: string, status: number},formDat
   console.log("SERVER ACTION: Delete", { id });
     return {message: "تم حذف المبيعات بنجاح!", status: 200};
 }
+
