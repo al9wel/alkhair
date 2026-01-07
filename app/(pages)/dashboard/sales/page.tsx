@@ -8,11 +8,13 @@ import Loader from "@/app/components/ui/Loader"
 import connectToDatabase from "@/app/lib/mongodb";
 import Sales from "@/app/models/Sales";
 
-export const dynamic = "force-dynamic";
-
+// export const dynamic = "force-dynamic";
 async function SalesTable() {
-    await connectToDatabase();
-    const sales = await Sales.find({}).lean();
+    // await connectToDatabase();
+    // const sales = await Sales.find({}).lean();
+    const response = await fetch(`${process.env.BASE_URL}/api/sales`)
+    const data = await response.json()
+    console.log(data.data)
     return (
         <DataTable columns={columns} data={sales}>
             <SalesDialog saleAction={createSale} />
