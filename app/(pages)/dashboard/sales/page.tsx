@@ -16,7 +16,7 @@ async function SalesTable() {
     const data = await response.json()
     console.log(data.data)
     return (
-        <DataTable columns={columns} data={sales}>
+        <DataTable columns={columns} data={data.data}>
             <SalesDialog saleAction={createSale} />
         </DataTable>
     )
