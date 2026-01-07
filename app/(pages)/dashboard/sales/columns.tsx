@@ -7,7 +7,7 @@ import { Button } from "@/app/components/ui/button"
 import { ArrowUpDown } from "lucide-react"
 
 export type Sales = {
-    id: string
+    _id: string
     name: string
     amount: number
 }
@@ -51,8 +51,8 @@ export const columns: ColumnDef<Sales>[] = [
         cell: ({ row }) => {
             return (
                 <div className="flex items-center gap-2 justify-center">
-                    <SalesDialog id={row.original.id} name={row.original.name} amount={row.original.amount} edit={true} saleAction={updateSale} />
-                    <SalesDialog id={row.original.id} del={true} saleAction={deleteSale} />
+                    <SalesDialog id={row.original._id} name={row.original.name} amount={row.original.amount} edit={true} saleAction={updateSale} />
+                    <SalesDialog id={row.original._id} del={true} saleAction={deleteSale} />
                 </div>
             );
         },
