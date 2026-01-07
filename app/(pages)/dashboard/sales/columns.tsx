@@ -14,7 +14,7 @@ export type Sales = {
 
 export const columns: ColumnDef<Sales>[] = [
     {
-        accessorKey: "id",
+        accessorKey: "_id",
         header: "المعرف",
     },
     {
@@ -49,10 +49,15 @@ export const columns: ColumnDef<Sales>[] = [
         header: () => <div className="text-center">العمليات</div>,
         id: "actions",
         cell: ({ row }) => {
+            const data = {
+                id: row.original._id,
+                name: row.original.name,
+                amount: row.original.amount
+            }
             return (
                 <div className="flex items-center gap-2 justify-center">
-                    <SalesDialog id={row.original._id} name={row.original.name} amount={row.original.amount} edit={true} saleAction={updateSale} />
-                    <SalesDialog id={row.original._id} del={true} saleAction={deleteSale} />
+                    <SalesDialog data={data} mode={"update"} saleAction={updateSale} />
+                    <SalesDialog data={data} mode={"delete"} saleAction={deleteSale} />
                 </div>
             );
         },

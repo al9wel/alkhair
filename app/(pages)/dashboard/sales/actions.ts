@@ -3,7 +3,6 @@ import dbConnect from "@/app/lib/mongodb";
 import Sales from "@/app/models/Sales";
 import { revalidatePath } from "next/cache";
 export async function createSale(state:{message: string, status: number},formData: FormData) {
-  const id = formData.get("id");
   const name = formData.get("name");
   const amount = formData.get("amount");
       if (!name || !amount) {

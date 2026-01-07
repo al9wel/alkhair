@@ -5,21 +5,15 @@ import SalesDialog from "./SalesDialog";
 import { createSale } from "./actions";
 import { Suspense } from "react";
 import Loader from "@/app/components/ui/Loader"
-import connectToDatabase from "@/app/lib/mongodb";
-import Sales from "@/app/models/Sales";
 
-// export const dynamic = "force-dynamic";
 async function SalesTable() {
-    // await connectToDatabase();
-    // const sales = await Sales.find({}).lean();
-    const response = await fetch(`${process.env.BASE_URL}/api/sales`)
-    const data = await response.json()
-    console.log(data.data)
+    const response = await fetch(`${process.env.BASE_URL}/api/sales`);
+    const data = await response.json();
     return (
         <DataTable columns={columns} data={data.data}>
-            <SalesDialog saleAction={createSale} />
+            <SalesDialog mode="create" saleAction={createSale} />
         </DataTable>
-    )
+    );
 }
 const SalesPage = async () => {
     return (
