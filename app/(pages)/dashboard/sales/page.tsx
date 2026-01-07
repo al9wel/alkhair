@@ -7,7 +7,9 @@ import { Suspense } from "react";
 import Loader from "@/app/components/ui/Loader"
 
 async function SalesTable() {
-    const response = await fetch(`${process.env.BASE_URL}/api/sales`);
+    const response = await fetch(`${process.env.BASE_URL}/api/sales`, {
+        cache: "no-store"
+    });
     const data = await response.json();
     return (
         <DataTable columns={columns} data={data.data}>
