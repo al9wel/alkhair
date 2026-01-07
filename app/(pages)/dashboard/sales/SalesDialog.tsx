@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { Plus, Loader2, Pen, Trash } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
@@ -28,18 +28,21 @@ type SalesDialogProps = {
 const SalesDialog = ({ id = "", name = "", amount = 0, edit = false, del = false, saleAction }: SalesDialogProps) => {
     const { isDarkMode } = useUIStore();
     const [mesaage, action, pending] = useActionState(saleAction, { message: "", status: 0 });
+    const [open, setOpen] = useState(false)
     useEffect(() => {
         if (!pending) {
             if (mesaage.status === 400) {
                 toast.error(mesaage.message);
             } else if (mesaage.status === 200) {
                 toast.success(mesaage.message);
+                const id = setTimeout(() => setOpen(false), 0);
+                return () => clearTimeout(id);
             }
         }
     }, [pending, mesaage]);
     if (del) {
         return (
-            <Dialog>
+            <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                     <Button size="sm" className="bg-red-400 hover:bg-red-500 text-white cursor-pointer">
                         <Trash className="h-4 w-4" />
@@ -84,7 +87,7 @@ const SalesDialog = ({ id = "", name = "", amount = 0, edit = false, del = false
     }
     else {
         return (
-            <Dialog>
+            <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                     <Button size="sm" className={`${edit ? "bg-yellow-600 hover:bg-yellow-700 " : "bg-primary1 hover:bg-primary-hover"}  text-white cursor-pointer`}>
                         {edit && <Pen className="h-4 w-4" />}
