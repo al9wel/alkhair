@@ -1,20 +1,19 @@
 import Header from "@/app/components/layout/Header";
 import { columns } from "./columns"
 import { DataTable } from "@/app/components/ui/data-table"
-import SalesDialog from "./SalesDialog";
-import { createSale } from "./actions";
 import { Suspense } from "react";
 import Loader from "@/app/components/ui/Loader"
-
+export const dynamic = 'force-dynamic';
 async function SalesTable() {
     const response = await fetch(`${process.env.BASE_URL}/api/sales`, {
         cache: "no-store"
     });
     const data = await response.json();
     return (
-        <DataTable columns={columns} data={data.data}>
-            <SalesDialog mode="create" saleAction={createSale} />
-        </DataTable>
+        <>
+            <DataTable columns={columns} data={data.data}>
+            </DataTable>
+        </>
     );
 }
 const SalesPage = async () => {

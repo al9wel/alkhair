@@ -1,8 +1,6 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import SalesDialog from "./SalesDialog"
-import { deleteSale, updateSale } from "./actions"
 import { Button } from "@/app/components/ui/button"
 import { ArrowUpDown } from "lucide-react"
 
@@ -27,7 +25,6 @@ export const columns: ColumnDef<Sales>[] = [
             return (
                 <div className="flex items-center justify-center">
                     <Button
-                        // variant="ghost"
                         className=" bg-primary1 text-white hover:bg-primary-hover/30 cursor-pointer"
                         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                     >
@@ -45,21 +42,21 @@ export const columns: ColumnDef<Sales>[] = [
             );
         },
     },
-    {
-        header: () => <div className="text-center">العمليات</div>,
-        id: "actions",
-        cell: ({ row }) => {
-            const data = {
-                id: row.original._id,
-                name: row.original.name,
-                amount: row.original.amount
-            }
-            return (
-                <div className="flex items-center gap-2 justify-center">
-                    <SalesDialog data={data} mode={"update"} saleAction={updateSale} />
-                    <SalesDialog data={data} mode={"delete"} saleAction={deleteSale} />
-                </div>
-            );
-        },
-    }
+    // {
+    //     header: () => <div className="text-center">العمليات</div>,
+    //     id: "actions",
+    //     cell: ({ row }) => {
+    //         const data = {
+    //             id: row.original._id,
+    //             name: row.original.name,
+    //             amount: row.original.amount
+    //         }
+    //         return (
+    //             <div className="flex items-center gap-2 justify-center">
+    //                 <SalesDialog data={data} mode={"update"} saleAction={updateSale} />
+    //                 <SalesDialog data={data} mode={"delete"} saleAction={deleteSale} />
+    //             </div>
+    //         );
+    //     },
+    // }
 ]

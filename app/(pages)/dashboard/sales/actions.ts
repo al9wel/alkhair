@@ -1,59 +1,32 @@
 "use server";
-import dbConnect from "@/app/lib/mongodb";
 import Sales from "@/app/models/Sales";
-import { revalidatePath } from "next/cache";
-export async function createSale(state:{message: string, status: number},formData: FormData) {
-  const name = formData.get("name");
-  const amount = formData.get("amount");
-      if (!name || !amount) {
-      return {message: "الرجاء ملء جميع الحقول المطلوبة." , status: 400}; 
-    }
+import { SalesType } from "../../../components/forms/SalesForm";
+
+export async function createSale1(sale: Omit<SalesType, "id">) {
+    const data = { ...sale, amount: parseInt(sale.amount!) }
     try {
-      await dbConnect();
-      await Sales.create({
-        name,
-        amount,
-      })
-      revalidatePath('/');
-      return {message: "تم إنشاء المبيعات بنجاح!", status: 200};
-    } 
-    catch {
-      return {message: "فشل في إنشاء المبيعات. الرجاء المحاولة مرة أخرى." , status: 400};
-    }
-}
-export async function updateSale(state:{message: string, status: number},formData: FormData) {
-  const id = formData.get("id");
-  const name = formData.get("name");
-  const amount = formData.get("amount");
-    if (!name || !amount) {
-      return {message: "الرجاء ملء جميع الحقول المطلوبة." , status: 400}; 
-    }
-    try {
-      await dbConnect();
-      await Sales.findByIdAndUpdate(id, {
-        name,
-        amount,
-        },
-        { new: true, runValidators: true }
-      )
-      revalidatePath('/');
-      return {message: "تم تعديل المبيعات بنجاح!", status: 200};
-    } 
-    catch {
-      return {message: "فشل في تعديل المبيعات. الرجاء المحاولة مرة أخرى." , status: 400};
+        await Sales.create(data)
+    } catch (error) {
+        console.error(error);
+        return { error: "فشل في انشاء المبيعات" };
     }
 }
 
-export async function deleteSale(state:{message: string, status: number},formData: FormData) {
-  const id = formData.get("id");
-  try {
-      await dbConnect();
+export async function updateSale1(sale: SalesType) {
+    const data = { ...sale, amount: parseInt(sale.amount!) }
+    try {
+        await Sales.findByIdAndUpdate(data._id,data,{ new: true, runValidators: true })
+    } catch (error) {
+        console.error(error);
+        return { error: "فشل في تعديل المبيعات" };
+    }
+}
+export async function deleteSale1(id: string) {
+    try {
       await Sales.findByIdAndDelete(id)
-      revalidatePath('/');
-      return {message: "تم حذف المبيعات بنجاح!", status: 200};
-    } 
-    catch {
-      return {message: "فشل في حذف المبيعات. الرجاء المحاولة مرة أخرى." , status: 400};
+    } catch (error) {
+        console.error(error);
+        return { error: "فشل في حذف المبيعات" };
     }
 }
 

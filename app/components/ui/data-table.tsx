@@ -21,16 +21,19 @@ import {
     TableRow,
 } from "@/app/components/ui/table"
 import { Button } from "./button"
-import React, { useState } from "react"
+import { useState } from "react"
 import { Input } from "./input"
+import CreateSaleDialog from "@/app/components/dialogs/sales/CreateSaleDialog"
+import UpdateSaleDialog from "@/app/components/dialogs/sales/UpdateSaleDialog"
+import DeleteSaleDialog from "@/app/components/dialogs/sales/DeleteSaleDialog"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[],
-    children: React.ReactNode
 }
 
-export function DataTable<TData, TValue>({ columns, data, children }: DataTableProps<TData, TValue>) {
+
+export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
     const [pagination, setPagination] = useState<PaginationState>({
         pageIndex: 0,
         pageSize: 5,
@@ -53,7 +56,6 @@ export function DataTable<TData, TValue>({ columns, data, children }: DataTableP
         onGlobalFilterChange: setGlobalFilter,
         getFilteredRowModel: getFilteredRowModel(),
     })
-
     return (
         <>
             <div className="flex justify-between gap-4 p-4 pb-2 items-center">
@@ -63,7 +65,7 @@ export function DataTable<TData, TValue>({ columns, data, children }: DataTableP
                     onChange={(e) => setGlobalFilter(e.target.value)}
                     className="max-w-full"
                 />
-                {children}
+                <CreateSaleDialog />
             </div>
             <div className="overflow-hidden rounded-md border">
                 <Table>
@@ -82,6 +84,9 @@ export function DataTable<TData, TValue>({ columns, data, children }: DataTableP
                                         </TableHead>
                                     )
                                 })}
+                                < TableHead className="text-center" >
+                                    <h1>العمليات</h1>
+                                </TableHead>
                             </TableRow>
                         ))}
                     </TableHeader>
@@ -97,6 +102,10 @@ export function DataTable<TData, TValue>({ columns, data, children }: DataTableP
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                         </TableCell>
                                     ))}
+                                    <TableCell className="flex justify-center items-center" >
+                                        <UpdateSaleDialog sale={row.original} />
+                                        <DeleteSaleDialog sale={row.original} />
+                                    </TableCell>
                                 </TableRow>
                             ))
                         ) : (
@@ -108,7 +117,7 @@ export function DataTable<TData, TValue>({ columns, data, children }: DataTableP
                         )}
                     </TableBody>
                 </Table>
-            </div>
+            </div >
             <div className="flex items-center justify-start space-x-2 py-4">
                 <Button
                     className="bg-primary1 hover:bg-primary-hover text-white cursor-pointer"
