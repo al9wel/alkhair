@@ -18,7 +18,7 @@ export default function DashboardLayout({ children, }: Readonly<{ children: Reac
             <main className="flex  w-full flex-col bg-light-content dark:bg-dark md:pr-64 min-h-screen">
                 <Navbar />
                 {children}
-                <Toaster />
+                <Toaster position="top-center" />
             </main>
         </section>
     );

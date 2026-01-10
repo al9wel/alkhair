@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Almarai } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider, } from "@clerk/nextjs";
-const cairo = Almarai({
+const almarai = Almarai({
   subsets: ["arabic"],
   weight: ["400", "700", "800", "300"],
 });
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="ar" dir="rtl">
-        <body className={`${cairo.className} antialiased `}>
+        <body className={`${almarai.className} antialiased `}>
           {children}
         </body>
       </html>

@@ -25,15 +25,22 @@ const DeleteSaleDialog = ({ sale }: { sale: unknown }) => {
         setIsLoading(true);
         setDialog(true)
         try {
-            await deleteSale1(_id)
+            const res = await deleteSale1(_id)
+            if (!res.success) {
+                toast.error(res.message || "حصلت مشكلة", {
+                    icon: "❌",
+                    duration: 2500,
+                });
+                setIsLoading(false);
+                return;
+            }
             router.refresh();
             setIsLoading(false);
             setDialog(false);
             toast.success("تم حذف المبيعات بنجاح",
                 {
-                    duration: 2000,
+                    duration: 2500,
                     icon: "✅",
-                    style: { color: "green" }
                 }
             );
         } catch (error) {
@@ -42,9 +49,8 @@ const DeleteSaleDialog = ({ sale }: { sale: unknown }) => {
             console.error(error);
             toast.error("حصلت مشكلة اثناء حذف المبيعات حاول مره اخرى",
                 {
-                    duration: 2000,
+                    duration: 2500,
                     icon: "❌",
-                    style: { color: "red" }
                 }
             );
         }
@@ -52,7 +58,7 @@ const DeleteSaleDialog = ({ sale }: { sale: unknown }) => {
     return (
         <Dialog open={dialog} onOpenChange={setDialog}>
             <DialogTrigger asChild>
-                <Button variant="ghost" size="sm" className={`cursor-pointer text-red-500 hover:text-red-600`}>
+                <Button variant="ghost" size="sm" className={`cursor-pointer bg-red-400/80 hover:bg-red-600/80 text-white hover:text-white dark:hover:bg-red-600/80 `}>
                     <Trash className="h-4 w-4" />
                 </Button>
             </DialogTrigger>

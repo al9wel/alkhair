@@ -10,7 +10,7 @@ import {
     DialogTrigger,
 } from "@/app/components/ui/dialog";
 import { useUIStore } from "@/app/store/uiStore";
-import { Pen } from "lucide-react";
+import { Edit } from "lucide-react";
 import SalesForm, { SalesType } from "../../forms/SalesForm";
 import { useState } from "react";
 
@@ -24,8 +24,8 @@ const UpdateSaleDialog = ({ sale }: { sale: unknown }) => {
     return (
         <Dialog open={dialog} onOpenChange={handleDialog}>
             <DialogTrigger asChild>
-                <Button variant="ghost" size="sm" className={`cursor-pointer text-yellow-500 hover:text-yellow-600`}>
-                    <Pen className="h-4 w-4" />
+                <Button variant="ghost" size="sm" className={`cursor-pointer bg-blue-400/80 hover:bg-blue-600/80 text-white hover:text-white dark:hover:bg-blue-600/80`}>
+                    <Edit className="h-4 w-4" />
                 </Button>
             </DialogTrigger>
             <DialogContent className={`${isDarkMode ? "dark" : ""} sm:max-w-[425px] text-right bg-light dark:bg-dark`}>

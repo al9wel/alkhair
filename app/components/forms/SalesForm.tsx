@@ -23,26 +23,27 @@ import { createSale1, updateSale1 } from "../../(pages)/dashboard/sales/actions"
 export type SalesType = {
     _id?: string;
     name?: string;
-    amount?: string
+    amount?: number
 }
 
 interface SalesFormProps {
     sale?: SalesType;
     dialog: (v: boolean) => void;
 }
+type FormFields = "name" | "amount"
 const formSchema = z.object({
-    name: z.string().min(2).max(50),
-    amount: z.string(),
+    name: z.string(),
+    amount: z.coerce.number(),
 });
 
 const SalesForm = ({ sale, dialog }: SalesFormProps) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
-    const form = useForm<z.infer<typeof formSchema>>({
+    const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: sale?.name || "",
-            amount: sale?.amount || "",
+            amount: sale?.amount || null,
         },
     });
 
@@ -50,9 +51,40 @@ const SalesForm = ({ sale, dialog }: SalesFormProps) => {
         setIsLoading(true);
         try {
             if (sale) {
-                await updateSale1({ ...values, _id: sale._id, });
-            } else {
-                await createSale1(values);
+                const res = await updateSale1({ ...values, _id: sale._id, });
+                if (!res.success) {
+                    if (res.field) {
+                        form.setError(res.field as FormFields, {
+                            message: res.message,
+                        });
+                        setIsLoading(false);
+                    } else {
+                        toast.error(res.message || "حصلت مشكلة", {
+                            icon: "❌",
+                            duration: 2500,
+                        });
+                        setIsLoading(false);
+                    }
+                    return;
+                }
+            }
+            else {
+                const res = await createSale1(values);
+                if (!res.success) {
+                    if (res.field) {
+                        form.setError(res.field as FormFields, {
+                            message: res.message,
+                        });
+                        setIsLoading(false);
+                    } else {
+                        toast.error(res.message || "حصلت مشكلة", {
+                            icon: "❌",
+                            duration: 2500,
+                        });
+                        setIsLoading(false);
+                    }
+                    return;
+                }
             }
             form.reset();
             router.refresh();
@@ -61,9 +93,8 @@ const SalesForm = ({ sale, dialog }: SalesFormProps) => {
             toast.success(
                 sale ? "تم تعديل المبيعات بنجاح" : "تمت اضافة المبيعات بنجاح",
                 {
-                    duration: 2000,
+                    duration: 2500,
                     icon: "✅",
-                    style: { color: "green" }
                 }
             )
         } catch (error) {
@@ -75,9 +106,8 @@ const SalesForm = ({ sale, dialog }: SalesFormProps) => {
                     ? "حصلت مشكلة اثناء تعديل المبيعات حاول مره اخرى"
                     : "حصلت مشكلة اثناء اضافة المبيعات حاول مره اخرى",
                 {
-                    duration: 2000,
+                    duration: 2500,
                     icon: "❌",
-                    style: { color: "red" }
                 }
             )
         }
@@ -93,7 +123,7 @@ const SalesForm = ({ sale, dialog }: SalesFormProps) => {
                         <FormItem>
                             <FormLabel>الاسم</FormLabel>
                             <FormControl>
-                                <Input placeholder="سالم احمد" {...field} />
+                                <Input required placeholder="سالم احمد" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -106,7 +136,18 @@ const SalesForm = ({ sale, dialog }: SalesFormProps) => {
                         <FormItem>
                             <FormLabel>الكميه</FormLabel>
                             <FormControl>
-                                <Input type="number" placeholder="الكميه" {...field} />
+                                {/* <Input type="number" placeholder="الكميه" {...field} /> */}
+                                <Input
+                                    required
+                                    type="number"
+                                    placeholder="الكمية"
+                                    value={
+                                        typeof field.value === "number" || typeof field.value === "string"
+                                            ? field.value
+                                            : ""
+                                    }
+                                    onChange={(e) => field.onChange(e.target.value)}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
