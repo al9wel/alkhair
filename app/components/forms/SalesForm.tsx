@@ -87,7 +87,7 @@ const SalesForm = ({ sale, dialog }: SalesFormProps) => {
                 }
             }
             form.reset();
-            router.refresh();
+            // router.refresh();
             setIsLoading(false);
             dialog(false)
             toast.success(

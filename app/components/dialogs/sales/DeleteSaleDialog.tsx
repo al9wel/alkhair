@@ -34,7 +34,7 @@ const DeleteSaleDialog = ({ sale }: { sale: unknown }) => {
                 setIsLoading(false);
                 return;
             }
-            router.refresh();
+            // router.refresh();
             setIsLoading(false);
             setDialog(false);
             toast.success("تم حذف المبيعات بنجاح",

@@ -2,6 +2,8 @@
 import Sales from "@/app/models/Sales";
 import { SalesType } from "../../../components/forms/SalesForm";
 import connectToDatabase from "@/app/lib/mongodb";
+import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 export async function createSale1(data: Omit<SalesType, "id">) {
     if (!data.name) {
         return {
@@ -21,6 +23,8 @@ export async function createSale1(data: Omit<SalesType, "id">) {
     try {
         await connectToDatabase();
         await Sales.create(data);
+        revalidatePath("/dashboard/sales")
+        // revalidateTag("sales", "default");
         return {
             success: true,
         };
@@ -52,6 +56,8 @@ export async function updateSale1(data: SalesType) {
             new: true,
             runValidators: true,
         });
+        revalidatePath("/dashboard/sales")
+        // revalidateTag("sales", "default");
         return {
             success: true,
         };
@@ -66,6 +72,8 @@ export async function deleteSale1(id: string) {
     try {
         await connectToDatabase();
         await Sales.findByIdAndDelete(id);
+        revalidatePath("/dashboard/sales")
+        // revalidateTag("sales", "default");
         return {
             success: true,
         };
