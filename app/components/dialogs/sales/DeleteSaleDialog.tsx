@@ -13,13 +13,12 @@ import { useUIStore } from "@/app/store/uiStore";
 import { Loader2, Trash } from "lucide-react";
 import { deleteSale1 } from "../../../(pages)/dashboard/sales/actions";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 const DeleteSaleDialog = ({ sale }: { sale: unknown }) => {
     const { _id } = sale as { _id: string }
     const { isDarkMode, } = useUIStore()
     const [dialog, setDialog] = useState(false)
-    const router = useRouter();
+    // const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const handleDelete = async () => {
         setIsLoading(true);

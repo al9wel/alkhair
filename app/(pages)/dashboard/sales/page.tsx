@@ -3,11 +3,8 @@ import { columns } from "./columns"
 import { DataTable } from "@/app/components/ui/data-table"
 import { Suspense } from "react";
 import Loader from "@/app/components/ui/Loader"
-// export const dynamic = 'force-dynamic';
 async function SalesTable() {
-    const response = await fetch(`${process.env.BASE_URL}/api/sales`, {
-        cache: "force-cache"
-    });
+    const response = await fetch(`${process.env.BASE_URL}/api/sales`);
     const data = await response.json();
     return (
         <>

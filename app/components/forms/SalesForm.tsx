@@ -16,7 +16,6 @@ import {
 import { Input } from "@/app/components/ui/input";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { Button } from "@/app/components/ui/button";
 import { createSale1, updateSale1 } from "../../(pages)/dashboard/sales/actions";
 
@@ -37,7 +36,7 @@ const formSchema = z.object({
 });
 
 const SalesForm = ({ sale, dialog }: SalesFormProps) => {
-    const router = useRouter();
+    // const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const form = useForm({
         resolver: zodResolver(formSchema),
