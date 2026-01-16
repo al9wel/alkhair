@@ -7,12 +7,6 @@ const Navbar = () => {
     const { isDarkMode, pageTitle, toggleSidebar, toggleDarkMode } = useUIStore();
     const { user } = useUser()
     const { openUserProfile } = useClerk();
-    const handleDarkModeClick = () => {
-        console.log("toggling dark mode")
-        const newValue = !isDarkMode
-        localStorage.setItem("isDarkMode", JSON.stringify(newValue))
-        toggleDarkMode();
-    }
     return (
         <nav className="flex items-center h-16 justify-between z-40 fixed top-0 left-0 w-full md:w-[calc(100%-16rem)]   bg-light dark:bg-dark px-5  text-black/70 dark:text-light-text border-b border-border1/30 dark:border-border1/15">
             <div className="flex items-center justify-center gap-4">
@@ -25,7 +19,7 @@ const Navbar = () => {
             </div>
             <div className="flex items-center justify-center gap-4">
                 <button
-                    onClick={handleDarkModeClick}
+                    onClick={() => toggleDarkMode()}
                     className="h-min cursor-pointer w-min rounded p-2  hover:text-primary duration-150 ">
                     {isDarkMode ? <Sun /> : <Moon />}
                 </button>
@@ -42,7 +36,7 @@ const Navbar = () => {
                     <p className="text-[16px] font-medium hidden sm:block">{user?.fullName}</p>
                 </button>
             </div>
-        </nav>
+        </nav >
     )
 }
 export default Navbar;

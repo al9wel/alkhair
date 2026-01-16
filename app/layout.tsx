@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Almarai } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider, } from "@clerk/nextjs";
+import DarkModeProvider from "./providers/DarkModeProvider";
 const almarai = Almarai({
   subsets: ["arabic"],
   weight: ["400", "700", "800", "300"],
@@ -19,11 +20,30 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="ar" dir="rtl">
-        <body className={`${almarai.className} antialiased `}>
-          {children}
-        </body>
-      </html>
+      <DarkModeProvider>
+        <html lang="ar" dir="rtl" suppressHydrationWarning>
+          {/* script for setting the dark or light mode from the local stoarge  */}
+          <head>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                (function () {
+                  try {
+                    const isDark = localStorage.getItem("isDarkMode");
+                    if (isDark === "true") {
+                      document.documentElement.classList.add("dark");
+                    }
+                  } catch (e) {}
+                })();
+              `,
+              }}
+            />
+          </head>
+          <body className={`${almarai.className} antialiased `}>
+            {children}
+          </body>
+        </html>
+      </DarkModeProvider>
     </ClerkProvider>
   );
 }

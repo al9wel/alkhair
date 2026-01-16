@@ -3,15 +3,24 @@ import { columns } from "./columns"
 import { DataTable } from "@/app/components/ui/data-table"
 import { Suspense } from "react";
 import Loader from "@/app/components/ui/Loader"
+import { headers } from "next/headers";
 async function SalesTable() {
-    const response = await fetch(`${process.env.BASE_URL}/api/sales`);
+    const headersList = await headers();
+    const host = headersList.get("host");
+    const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+    const response = await fetch(`${protocol}://${host}/api/sales`);
+    if (!response.ok) {
+        return (
+            <DataTable columns={columns} data={[]}>
+            </DataTable>
+        );
+    }
     const data = await response.json();
     return (
-        <>
-            <DataTable columns={columns} data={data.data}>
-            </DataTable>
-        </>
+        <DataTable columns={columns} data={data.data ?? []}>
+        </DataTable>
     );
+
 }
 const SalesPage = async () => {
     return (
