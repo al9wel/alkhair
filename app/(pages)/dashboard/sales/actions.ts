@@ -11,7 +11,6 @@ export async function createSale1(data: Omit<SalesType, "id">) {
             message: "الاسم مطلوب",
         };
     }
-
     if (!data.amount) {
         return {
             success: false,
@@ -19,9 +18,17 @@ export async function createSale1(data: Omit<SalesType, "id">) {
             message: "الكمية مطلوبة ويجب أن تكون أكبر من صفر",
         };
     }
+    if (data.products[0].quantity === 0) {
+        return {
+            success: false,
+            field: "products.0.quantity",
+            message: "الكمية مطلوبة ويجب أن تكون أكبر من صفر",
+        };
+    }
     try {
         await connectToDatabase();
-        await Sales.create(data);
+        const s = await Sales.create(data);
+        console.log(s)
         revalidatePath("/dashboard/sales")
         return {
             success: true,
@@ -34,7 +41,7 @@ export async function createSale1(data: Omit<SalesType, "id">) {
     }
 }
 export async function updateSale1(data: SalesType) {
-        if (!data.name) {
+    if (!data.name) {
         return {
             success: false,
             field: "name",

@@ -102,7 +102,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                         </TableCell>
                                     ))}
-                                    <TableCell className="flex justify-center items-center gap-2" >
+                                    <TableCell className="flex justify-center items-center gap-2 " >
                                         <UpdateSaleDialog sale={row.original} />
                                         <DeleteSaleDialog sale={row.original} />
                                     </TableCell>

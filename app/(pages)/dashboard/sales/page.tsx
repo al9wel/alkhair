@@ -11,14 +11,12 @@ async function SalesTable() {
     const response = await fetch(`${protocol}://${host}/api/sales`);
     if (!response.ok) {
         return (
-            <DataTable columns={columns} data={[]}>
-            </DataTable>
+            <DataTable columns={columns} data={[]} />
         );
     }
     const data = await response.json();
     return (
-        <DataTable columns={columns} data={data.data ?? []}>
-        </DataTable>
+        <DataTable columns={columns} data={data.data ?? []} />
     );
 
 }

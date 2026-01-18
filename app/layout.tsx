@@ -3,6 +3,7 @@ import { Almarai } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider, } from "@clerk/nextjs";
 import DarkModeProvider from "./providers/DarkModeProvider";
+import QueryProvider from "./providers/QueryProvider";
 const almarai = Almarai({
   subsets: ["arabic"],
   weight: ["400", "700", "800", "300"],
@@ -40,7 +41,9 @@ export default function RootLayout({
             />
           </head>
           <body className={`${almarai.className} antialiased `}>
-            {children}
+            <QueryProvider>
+              {children}
+            </QueryProvider>
           </body>
         </html>
       </DarkModeProvider>

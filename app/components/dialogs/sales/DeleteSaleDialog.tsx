@@ -16,9 +16,7 @@ import { toast } from "sonner";
 import { useState } from "react";
 const DeleteSaleDialog = ({ sale }: { sale: unknown }) => {
     const { _id } = sale as { _id: string }
-    const { isDarkMode, } = useUIStore()
     const [dialog, setDialog] = useState(false)
-    // const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const handleDelete = async () => {
         setIsLoading(true);
@@ -61,7 +59,7 @@ const DeleteSaleDialog = ({ sale }: { sale: unknown }) => {
                     <Trash className="h-4 w-4" />
                 </Button>
             </DialogTrigger>
-            <DialogContent className={`${isDarkMode ? "dark" : ""} sm:max-w-[425px] text-right bg-light dark:bg-dark`}>
+            <DialogContent className={`sm:max-w-[425px] text-right bg-light dark:bg-dark`}>
                 <DialogHeader>
                     <DialogTitle className="text-black/70 dark:text-light-text">
                         حذف مبيعات

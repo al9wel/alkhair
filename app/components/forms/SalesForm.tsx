@@ -3,8 +3,8 @@
 import { z } from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
+import { useMemo, useState } from "react";
 import {
     Form,
     FormControl,
@@ -22,35 +22,81 @@ import { createSale1, updateSale1 } from "../../(pages)/dashboard/sales/actions"
 export type SalesType = {
     _id?: string;
     name?: string;
-    amount?: number
+    amount?: number;
+    products: ProductsType[];
+    totalPrice: number
+}
+export type ProductsType = {
+    productId: string;
+    name: string;
+    price: number;
+    quantity: number,
+}
+export type Products = {
+    _id?: string;
+    name?: string;
+    price?: number
 }
 
 interface SalesFormProps {
     sale?: SalesType;
     dialog: (v: boolean) => void;
+    products?: Products[]
 }
-type FormFields = "name" | "amount"
 const formSchema = z.object({
-    name: z.string(),
-    amount: z.coerce.number(),
+    name: z.string().min(1, "الاسم مطلوب"),
+    amount: z.coerce.number().min(1, "الكمية مطلوبة"),
+    products: z.array(
+        z.object({
+            productId: z.string(),
+            name: z.string(),
+            price: z.number(),
+            quantity: z.coerce.number().min(0),
+        })
+    ).min(1),
 });
+type FormFields = "name" | "amount"
 
-const SalesForm = ({ sale, dialog }: SalesFormProps) => {
-    // const router = useRouter();
+const SalesForm = ({ sale, dialog, products }: SalesFormProps) => {
     const [isLoading, setIsLoading] = useState(false);
+    const prod = useMemo(() => {
+        if (sale) {
+            return sale.products.map((p) => ({
+                productId: p.productId,
+                name: p.name,
+                price: p.price,
+                quantity: p.quantity,
+            }));
+        }
+        return products?.map((p) => ({
+            productId: p._id!,
+            name: p.name!,
+            price: p.price!,
+            quantity: 0,
+        })) ?? [];
+    }, [sale, products]);
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: sale?.name || "",
             amount: sale?.amount || null,
+            products: prod ?? [],
         },
     });
-
+    const watchedProducts = useWatch({
+        control: form.control,
+        name: "products",
+    });
+    const totalPrice = useMemo(() => {
+        return watchedProducts.reduce((total, product) => {
+            return total + (product.quantity as any * product.price);
+        }, 0);
+    }, [watchedProducts])
     async function onSubmit(values: z.infer<typeof formSchema>) {
         setIsLoading(true);
         try {
             if (sale) {
-                const res = await updateSale1({ ...values, _id: sale._id, });
+                const res = await updateSale1({ ...values, _id: sale._id, totalPrice });
                 if (!res.success) {
                     if (res.field) {
                         form.setError(res.field as FormFields, {
@@ -68,7 +114,7 @@ const SalesForm = ({ sale, dialog }: SalesFormProps) => {
                 }
             }
             else {
-                const res = await createSale1(values);
+                const res = await createSale1({ ...values, totalPrice });
                 if (!res.success) {
                     if (res.field) {
                         form.setError(res.field as FormFields, {
@@ -111,7 +157,6 @@ const SalesForm = ({ sale, dialog }: SalesFormProps) => {
             )
         }
     }
-
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="text-black/70 dark:text-light-text space-y-4">
@@ -122,7 +167,7 @@ const SalesForm = ({ sale, dialog }: SalesFormProps) => {
                         <FormItem>
                             <FormLabel>الاسم</FormLabel>
                             <FormControl>
-                                <Input required placeholder="سالم احمد" {...field} />
+                                <Input placeholder="سالم احمد" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -135,9 +180,7 @@ const SalesForm = ({ sale, dialog }: SalesFormProps) => {
                         <FormItem>
                             <FormLabel>الكميه</FormLabel>
                             <FormControl>
-                                {/* <Input type="number" placeholder="الكميه" {...field} /> */}
                                 <Input
-                                    required
                                     type="number"
                                     placeholder="الكمية"
                                     value={
@@ -152,6 +195,34 @@ const SalesForm = ({ sale, dialog }: SalesFormProps) => {
                         </FormItem>
                     )}
                 />
+                {prod?.map((product, index) => (
+                    <FormField
+                        key={product.productId}
+                        control={form.control}
+                        name={`products.${index}.quantity`}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>
+                                    {product.name} — السعر: {product.price}
+                                </FormLabel>
+                                <FormControl>
+                                    <Input
+                                        required
+                                        type="number"
+                                        placeholder="الكمية"
+                                        value={
+                                            typeof field.value === "number" || typeof field.value === "string" ? field.value : ""
+                                        }
+                                        onChange={(e) => field.onChange(Number(e.target.value))}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                ))}
+                <FormLabel>السعر الاجمالي</FormLabel>
+                <FormLabel className="text-green-400">{totalPrice.toLocaleString() + " ريال "}</FormLabel>
                 <Button disabled={isLoading} className={`bg-primary1 hover:bg-primary-hover text-white cursor-pointer w-full`}>
                     {isLoading ? (
                         <Loader2 className="size-6 animate-spin" />

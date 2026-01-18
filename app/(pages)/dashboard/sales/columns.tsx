@@ -3,6 +3,8 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { Button } from "@/app/components/ui/button"
 import { ArrowUpDown } from "lucide-react"
+import { SalesType } from "@/app/components/forms/SalesForm"
+import { Badge } from "@/app/components/ui/badge"
 
 export type Sales = {
     _id: string
@@ -10,11 +12,12 @@ export type Sales = {
     amount: number
 }
 
-export const columns: ColumnDef<Sales>[] = [
-    {
-        accessorKey: "_id",
-        header: "المعرف",
-    },
+
+export const columns: ColumnDef<SalesType>[] = [
+    // {
+    //     accessorKey: "_id",
+    //     header: "المعرف",
+    // },
     {
         accessorKey: "name",
         header: "الاسم",
@@ -42,21 +45,20 @@ export const columns: ColumnDef<Sales>[] = [
             );
         },
     },
-    // {
-    //     header: () => <div className="text-center">العمليات</div>,
-    //     id: "actions",
-    //     cell: ({ row }) => {
-    //         const data = {
-    //             id: row.original._id,
-    //             name: row.original.name,
-    //             amount: row.original.amount
-    //         }
-    //         return (
-    //             <div className="flex items-center gap-2 justify-center">
-    //                 <SalesDialog data={data} mode={"update"} saleAction={updateSale} />
-    //                 <SalesDialog data={data} mode={"delete"} saleAction={deleteSale} />
-    //             </div>
-    //         );
-    //     },
-    // }
+    {
+        accessorKey: "products",
+        header: () => <div className="flex justify-center items-center">المنتجات</div>,
+        cell: ({ row }) => {
+            return (
+                <div className="flex justify-center items-center gap-1">
+                    {row.original.products.map((p) => <Badge key={p.productId} variant={"outline"} className="text-black/70 dark:text-light-text" > {`${p.quantity} ${p.name}`}</Badge>)}
+                </div>
+            )
+        }
+    },
+    {
+        accessorKey: "totalPrice",
+        header: "السعر الاجمالي",
+        cell: ({ row }) => <Badge className=" bg-green-600/80 text-white" >{`${row.original.totalPrice}  ريال `}</Badge>
+    },
 ]

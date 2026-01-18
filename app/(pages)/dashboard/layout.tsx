@@ -2,7 +2,6 @@ import Sidebar from "@/app/components/layout/Sidebar";
 import Navbar from "@/app/components/layout/Navbar";
 import { Toaster } from "sonner";
 export default function DashboardLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
-
     return (
         <section className={` relative text-gray-900`}>
             <Sidebar />
